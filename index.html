@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)file:///C:/Users/user/Downloads/index_2.html -->
+<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easy Swap</title>
+<script src="./index_files/ethers.umd.min.js.Без названия"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08111e;--surface:#0d1f35;--card:#091525;
+  --border:#1a3a5c;--border2:#2a5a8c;
+  --text:#e2f0ff;--muted:#4a90d9;--dim:#1a3a5c;
+  --green:#22c55e;--red:#ef4444;--amber:#f59e0b;
+  --accent1:#1a6abf;--accent2:#0f4a9c;
+}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',sans-serif;min-height:100vh}
+
+/* NAV */
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-icon{width:38px;height:38px;background:linear-gradient(135deg,#1a6abf,#0d3a8c);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#a0d4ff;letter-spacing:-0.5px}
+.logo-text{font-size:17px;font-weight:700;color:var(--text)}
+.logo-sub{font-size:10px;color:var(--muted);margin-top:1px}
+.nav-links{display:flex;gap:2px}
+.nav-link{color:var(--muted);text-decoration:none;padding:7px 14px;border-radius:9px;font-size:14px;cursor:pointer;transition:all .15s;border:none;background:none}
+.nav-link.active,.nav-link:hover{background:#1a3a5c;color:var(--text)}
+.wallet-btn{background:#1a3a5c;border:1px solid var(--border2);color:var(--muted);padding:9px 18px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:500;transition:all .15s;white-space:nowrap}
+.wallet-btn:hover{background:#2a4a7c;color:var(--text)}
+.wallet-btn.connected{color:var(--green);border-color:#1a5a2c}
+.net-pill{display:inline-block;font-size:10px;padding:2px 7px;border-radius:5px;margin-left:5px;vertical-align:middle}
+.net-litvm{background:#0a2a4c;color:#4a90d9}
+.net-bnb{background:#2a1a00;color:#f59e0b}
+.net-other{background:#2a0a0a;color:#ef4444}
+
+/* LAYOUT */
+.page{max-width:460px;margin:0 auto;padding:28px 20px 60px}
+
+/* CARD */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px;margin-bottom:16px}
+.card-title{font-size:17px;font-weight:600;margin-bottom:20px;color:var(--text)}
+
+/* TOKEN BOX */
+.tok-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
+.tok-label{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.tok-bal{font-size:11px;color:#5a9adf;cursor:pointer}
+.tok-bal:hover{color:#a0d4ff}
+.tok-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.tok-input{background:transparent;border:none;outline:none;font-size:26px;font-weight:600;color:var(--text);width:0;flex:1;min-width:0}
+.tok-input::placeholder{color:var(--dim)}
+.tok-badge{display:flex;align-items:center;gap:7px;background:#152a45;border:1px solid var(--border2);border-radius:22px;padding:7px 13px;white-space:nowrap;flex-shrink:0}
+.tok-icon{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#fff;flex-shrink:0}
+.icon-zk{background:linear-gradient(135deg,#2a6abf,#1a4a9c)}
+.icon-esp{background:linear-gradient(135deg,#1a9e75,#0f6e56)}
+.tok-name{font-size:14px;font-weight:700;color:var(--text)}
+.pct-row{display:flex;gap:6px;margin-top:12px}
+.pct-btn{flex:1;background:#152a45;border:1px solid var(--border);border-radius:8px;color:var(--muted);font-size:12px;padding:4px 0;cursor:pointer;transition:all .15s}
+.pct-btn:hover{background:#1e3a5c;color:#a0d4ff}
+
+/* MIDDLE */
+.mid-row{display:flex;justify-content:center;padding:8px 0}
+.flip-btn{width:38px;height:38px;background:#152a45;border:2px solid var(--surface);border-radius:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);font-size:19px;transition:all .2s}
+.flip-btn:hover{background:#1e3a5c;transform:rotate(180deg)}
+
+/* RECEIVE */
+.recv-val{font-size:26px;font-weight:600;color:var(--muted);min-height:34px;display:flex;align-items:center}
+.dash{width:30px;height:3px;background:#1a3a5c;border-radius:2px}
+.rate-line{display:flex;justify-content:space-between;font-size:12px;color:#3a6a9a;margin:12px 4px 4px}
+
+/* BUTTONS */
+.main-btn{width:100%;padding:15px;border-radius:14px;border:none;font-size:15px;font-weight:700;cursor:pointer;transition:all .15s;margin-top:12px;letter-spacing:.2px}
+.btn-off{background:#152a45;color:#3a6a9a;cursor:not-allowed}
+.btn-connect{background:linear-gradient(135deg,#1a5a9c,#0f3a7c);color:#a0d4ff}
+.btn-connect:hover{opacity:.85}
+.btn-go{background:linear-gradient(135deg,#1a7a5c,#0f5a3c);color:#a0f0d0}
+.btn-go:hover{opacity:.85}
+.btn-wait{background:#152a45;color:#5a8aaa;cursor:wait}
+
+/* NFT */
+.nft-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.nft-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.nft-art{width:100%;aspect-ratio:1;border-radius:12px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;font-size:44px;background:var(--card);border:1px solid var(--border)}
+.nft-name{font-size:14px;font-weight:700;margin-bottom:5px}
+.nft-desc{font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.55}
+.nft-price{font-size:13px;font-weight:700;margin-bottom:13px}
+.price-free{color:var(--green)}
+.price-paid{color:var(--amber)}
+.nft-btn{width:100%;padding:11px;border-radius:11px;border:none;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s}
+.nft-btn-free{background:linear-gradient(135deg,#1a5a9c,#0f3a7c);color:#a0d4ff}
+.nft-btn-free:hover{opacity:.85}
+.nft-btn-paid{background:linear-gradient(135deg,#6a3a00,#4a2800);color:#f0b060}
+.nft-btn-paid:hover{opacity:.85}
+.nft-btn:disabled{background:#152a45;color:#3a6a9a;cursor:not-allowed}
+.nft-count{font-size:11px;color:#3a6a9a;margin-top:7px}
+.net-warn{background:#2a0a00;border:1px solid #6a2a00;border-radius:10px;padding:10px 14px;font-size:12px;color:#f08060;margin-bottom:12px;text-align:center;line-height:1.5;display:none}
+
+/* LIQUIDITY */
+.pool-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.pool-stat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center}
+.pool-val{font-size:15px;font-weight:600;color:var(--text)}
+.pool-lbl{font-size:10px;color:var(--muted);margin-top:3px}
+
+/* STATUS */
+.status{border-radius:11px;padding:10px 15px;font-size:12px;text-align:center;margin-top:8px;display:none}
+.status.show{display:block}
+.status.ok{background:#0a2a15;border:1px solid #1a5a2c;color:var(--green)}
+.status.err{background:#2a0a0a;border:1px solid #5a1a1a;color:var(--red)}
+.status.wait{background:#1a1500;border:1px solid #4a3a00;color:var(--amber)}
+
+/* PANELS */
+.panel{display:none}
+.panel.active{display:block}
+
+/* MOBILE NAV */
+.mob-nav{display:none;gap:4px;padding:16px 20px 0;max-width:460px;margin:0 auto}
+@media(max-width:600px){
+  nav .nav-links{display:none}
+  .mob-nav{display:flex}
+  .mob-btn{flex:1;padding:9px;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--muted);cursor:pointer;font-size:13px;font-weight:500}
+  .mob-btn.active{background:#1a3a5c;color:var(--text)}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="file:///C:/Users/user/Downloads/index_2.html#">
+    <div class="logo-icon">ES</div>
+    <div>
+      <div class="logo-text">Easy Swap</div>
+      <div class="logo-sub">LitVM · BNB Mainnet</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="showTab(&#39;swap&#39;,this)">Swap</button>
+    <button class="nav-link" onclick="showTab(&#39;nft&#39;,this)">Mint NFT</button>
+    <button class="nav-link" onclick="showTab(&#39;liquidity&#39;,this)">Liquidity</button>
+  </div>
+  <button class="wallet-btn" id="walletBtn" onclick="connectWallet()">
+    Connect Wallet
+  </button>
+</nav>
+
+<div class="mob-nav">
+  <button class="mob-btn active" onclick="showTab(&#39;swap&#39;,this)">Swap</button>
+  <button class="mob-btn" onclick="showTab(&#39;nft&#39;,this)">Mint NFT</button>
+  <button class="mob-btn" onclick="showTab(&#39;liquidity&#39;,this)">Liquidity</button>
+</div>
+
+<div class="page">
+
+  <!-- ═══ SWAP ═══ -->
+  <div id="panel-swap" class="panel active">
+    <div class="card">
+      <div class="card-title">Swap</div>
+
+      <div class="tok-box">
+        <div class="tok-label">
+          <span>You pay</span>
+          <span class="tok-bal" id="balNative" onclick="setPct(100)">Balance: —</span>
+        </div>
+        <div class="tok-row">
+          <input class="tok-input" id="payAmt" type="number" placeholder="0" min="0" oninput="onInput()">
+          <div class="tok-badge">
+            <div class="tok-icon icon-zk">zk</div>
+            <span class="tok-name">zkLTC</span>
+          </div>
+        </div>
+        <div class="pct-row">
+          <button class="pct-btn" onclick="setPct(25)">25%</button>
+          <button class="pct-btn" onclick="setPct(50)">50%</button>
+          <button class="pct-btn" onclick="setPct(75)">75%</button>
+          <button class="pct-btn" onclick="setPct(100)">Max</button>
+        </div>
+      </div>
+
+      <div class="mid-row">
+        <div class="flip-btn" onclick="flipDir()" title="Flip tokens">⇅</div>
+      </div>
+
+      <div class="tok-box">
+        <div class="tok-label">You receive</div>
+        <div class="tok-row">
+          <div class="recv-val" id="recvAmt"><div class="dash"></div></div>
+          <div class="tok-badge">
+            <div class="tok-icon icon-esp">ES</div>
+            <span class="tok-name">ESP</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rate-line" id="rateLine" style="display:none">
+        <span>Exchange rate</span>
+        <span>1 zkLTC = <span id="rateVal">—</span> ESP</span>
+      </div>
+
+      <button class="main-btn btn-connect" id="swapBtn" onclick="doSwap()">Connect Wallet</button>
+    </div>
+    <div class="status" id="swapSt"></div>
+  </div>
+
+  <!-- ═══ NFT ═══ -->
+  <div id="panel-nft" class="panel">
+    <div class="net-warn" id="nftWarn"></div>
+    <div class="nft-grid">
+
+      <div class="nft-card">
+        <div class="nft-art">🎨</div>
+        <div class="nft-name">Easy Swap NFT</div>
+        <div class="nft-desc">Тестовый минт на LitVM Testnet. Бесплатно!</div>
+        <div class="nft-price price-free">FREE</div>
+        <button class="nft-btn nft-btn-free" id="freeBtn" onclick="mintFree()">Mint Free</button>
+        <div class="nft-count" id="freeCnt"></div>
+      </div>
+
+      <div class="nft-card">
+        <div class="nft-art">💎</div>
+        <div class="nft-name">Easy Swap NFT</div>
+        <div class="nft-desc">Минт на LitVM Testnet за тестовый zkLTC (~$0.9)</div>
+        <div class="nft-price price-paid" id="paidPriceLabel">~$0.9 в zkLTC</div>
+        <button class="nft-btn nft-btn-paid" id="paidBtn" onclick="mintPaid()">Mint for BNB</button>
+        <div class="nft-count" id="paidCnt"></div>
+      </div>
+
+    </div>
+    <div class="status" id="nftSt"></div>
+  </div>
+
+  <!-- ═══ LIQUIDITY ═══ -->
+  <div id="panel-liquidity" class="panel">
+    <div class="card">
+      <div class="card-title">Pool Info</div>
+      <div class="pool-stats">
+        <div class="pool-stat"><div class="pool-val" id="resNative">—</div><div class="pool-lbl">zkLTC</div></div>
+        <div class="pool-stat"><div class="pool-val" id="resESP">—</div><div class="pool-lbl">ESP</div></div>
+        <div class="pool-stat"><div class="pool-val" id="myLP">—</div><div class="pool-lbl">My LP</div></div>
+      </div>
+      <button class="main-btn btn-connect" onclick="loadPool()">↻ Refresh</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Add Liquidity</div>
+      <div class="tok-box">
+        <div class="tok-label">zkLTC amount</div>
+        <div class="tok-row">
+          <input class="tok-input" id="liqNative" type="number" placeholder="0" min="0">
+          <div class="tok-badge"><div class="tok-icon icon-zk">zk</div><span class="tok-name">zkLTC</span></div>
+        </div>
+      </div>
+      <div style="height:10px"></div>
+      <div class="tok-box">
+        <div class="tok-label">ESP amount</div>
+        <div class="tok-row">
+          <input class="tok-input" id="liqESP" type="number" placeholder="0" min="0">
+          <div class="tok-badge"><div class="tok-icon icon-esp">ES</div><span class="tok-name">ESP</span></div>
+        </div>
+      </div>
+      <button class="main-btn btn-go" style="margin-top:14px" onclick="addLiq()">Add Liquidity</button>
+    </div>
+    <div class="status" id="liqSt"></div>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+// ══════════════════════════════════════════
+// КОНФИГ — вставь адреса контрактов сюда
+// ══════════════════════════════════════════
+const CFG = {
+  ESP_TOKEN : "0x33e4f87C86857F99E14DB4507dE1d8DAc8228f1f",
+  SWAP      : "0x01f38b021fcB501373CFda66Af83bA0CcCcf3c90",
+  TEST_NFT  : "0x3f6dAcf9600108c3fD27Fbdc4E777e2Ed70c0566",
+  PAID_NFT  : "0x513645d481ECCCE875aEad2F5c7654Dbe25DEcbC",
+
+  // Chain ID LitVM — найди на dashboard.caldera.xyz и вставь в hex
+  // Пример: если Chain ID = 1234, то "0x4D2"
+  LITVM_ID  : "0x1159",  // Chain ID 4441
+
+  // Данные LitVM сети для автодобавления в MetaMask
+  LITVM_NET : {
+    chainId: "0x1159",
+    chainName: "LitVM LiteForge",
+    nativeCurrency: { name: "zkLTC", symbol: "zkLTC", decimals: 18 },
+    rpcUrls: ["https://liteforge.rpc.caldera.xyz/http"],
+    blockExplorerUrls: ["https://liteforge.explorer.caldera.xyz"]
+  },
+
+  BNB_ID    : "0x38"  // BNB Mainnet — не менять
+};
+
+// ── ABI ──────────────────────────────────
+const ERC20_ABI = [
+  "function balanceOf(address) view returns(uint256)",
+  "function approve(address,uint256) returns(bool)",
+  "function allowance(address,address) view returns(uint256)"
+];
+const SWAP_ABI = [
+  "function swapNativeToESP() payable",
+  "function swapESPToNative(uint256)",
+  "function getAmountOut(bool,uint256) view returns(uint256)",
+  "function getReserves() view returns(uint256,uint256)",
+  "function addLiquidity(uint256) payable",
+  "function lpBalance(address) view returns(uint256)"
+];
+const FREE_NFT_ABI = [
+  "function mint()",
+  "function mintedCount(address) view returns(uint256)"
+];
+const PAID_NFT_ABI = [
+  "function mint(uint256) payable",
+  "function mintPrice() view returns(uint256)",
+  "function mintedCount(address) view returns(uint256)"
+];
+
+// ── State ─────────────────────────────────
+let provider, signer, userAddr;
+let nativeBal = 0n;
+let swapDir   = true; // true = zkLTC→ESP
+
+// ══════════════════════════════════════════
+// UI helpers
+// ══════════════════════════════════════════
+function showTab(name, el) {
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  document.querySelectorAll('.nav-link,.mob-btn').forEach(b=>b.classList.remove('active'));
+  if(el) el.classList.add('active');
+  if(name==='nft') refreshNft();
+  if(name==='liquidity') loadPool();
+}
+
+function st(id, msg, type) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = 'status show ' + (type||'');
+}
+function hideSt(id){ document.getElementById(id).className='status'; }
+
+function fmt(wei){ return parseFloat(ethers.formatEther(wei)).toFixed(4); }
+function short(a){ return a.slice(0,6)+'...'+a.slice(-4); }
+
+// ══════════════════════════════════════════
+// WALLET
+// ══════════════════════════════════════════
+async function connectWallet() {
+  if (!window.ethereum) { alert("Установи MetaMask: https://metamask.io"); return; }
+  provider = new ethers.BrowserProvider(window.ethereum);
+  const accs = await provider.send("eth_requestAccounts",[]);
+  userAddr = accs[0];
+  signer   = await provider.getSigner();
+
+  window.ethereum.on('accountsChanged', a => { userAddr=a[0]; refreshWallet(); });
+  window.ethereum.on('chainChanged', () => location.reload());
+  await refreshWallet();
+}
+
+async function refreshWallet() {
+  if (!provider) return;
+  const net   = await provider.getNetwork();
+  const chain = '0x' + net.chainId.toString(16);
+  nativeBal   = await provider.getBalance(userAddr);
+
+  const btn = document.getElementById('walletBtn');
+  let pill = '';
+  if (chain === CFG.BNB_ID)
+    pill = '<span class="net-pill net-bnb">BNB</span>';
+  else if (chain.toLowerCase() === CFG.LITVM_ID.toLowerCase())
+    pill = '<span class="net-pill net-litvm">LitVM</span>';
+  else
+    pill = '<span class="net-pill net-other">Unknown net</span>';
+
+  btn.innerHTML = short(userAddr) + pill;
+  btn.classList.add('connected');
+
+  document.getElementById('balNative').textContent = 'Balance: ' + fmt(nativeBal) + ' zkLTC';
+  updateSwapBtn();
+}
+
+async function switchNet(chainId, params) {
+  try {
+    await window.ethereum.request({method:'wallet_switchEthereumChain',params:[{chainId}]});
+  } catch(e) {
+    if (e.code===4902 && params)
+      await window.ethereum.request({method:'wallet_addEthereumChain',params:[params]});
+    else throw e;
+  }
+  provider = new ethers.BrowserProvider(window.ethereum);
+  signer   = await provider.getSigner();
+}
+
+// ══════════════════════════════════════════
+// SWAP
+// ══════════════════════════════════════════
+async function onInput() {
+  const v = parseFloat(document.getElementById('payAmt').value);
+  if (!v || v<=0) {
+    document.getElementById('recvAmt').innerHTML='<div class="dash"></div>';
+    document.getElementById('rateLine').style.display='none';
+    updateSwapBtn(); return;
+  }
+  if (!provider || CFG.SWAP.startsWith('ВСТАВЬ')) {
+    document.getElementById('recvAmt').textContent='...'; return;
+  }
+  try {
+    const swap = new ethers.Contract(CFG.SWAP, SWAP_ABI, provider);
+    const out  = await swap.getAmountOut(swapDir, ethers.parseEther(v.toString()));
+    document.getElementById('recvAmt').textContent = fmt(out);
+    document.getElementById('rateLine').style.display='flex';
+    document.getElementById('rateVal').textContent  = (parseFloat(fmt(out))/v).toFixed(2);
+  } catch { document.getElementById('recvAmt').textContent='—'; }
+  updateSwapBtn();
+}
+
+function setPct(p) {
+  document.getElementById('payAmt').value = parseFloat(ethers.formatEther((nativeBal*BigInt(p))/100n)).toFixed(6);
+  onInput();
+}
+
+function flipDir() {
+  swapDir = !swapDir;
+  document.getElementById('payAmt').value='';
+  document.getElementById('recvAmt').innerHTML='<div class="dash"></div>';
+  document.getElementById('rateLine').style.display='none';
+  updateSwapBtn();
+}
+
+function updateSwapBtn() {
+  const btn = document.getElementById('swapBtn');
+  const v   = parseFloat(document.getElementById('payAmt').value);
+  if (!userAddr)    { btn.textContent='Connect Wallet'; btn.className='main-btn btn-connect'; return; }
+  if (!v || v<=0)   { btn.textContent='Enter amount';   btn.className='main-btn btn-off';     return; }
+  btn.textContent='Swap'; btn.className='main-btn btn-go';
+}
+
+async function doSwap() {
+  if (!userAddr) { connectWallet(); return; }
+  const v = parseFloat(document.getElementById('payAmt').value);
+  if (!v||v<=0) return;
+  const net = await provider.getNetwork();
+  if ('0x'+net.chainId.toString(16) !== CFG.LITVM_ID.toLowerCase()) {
+    try { st('swapSt','Переключаем на LitVM Testnet...','wait'); await switchNet(CFG.LITVM_ID, CFG.LITVM_NET); }
+    catch { st('swapSt','Ошибка переключения сети','err'); return; }
+  }
+  const btn   = document.getElementById('swapBtn');
+  const amt   = ethers.parseEther(v.toString());
+  try {
+    const swap = new ethers.Contract(CFG.SWAP, SWAP_ABI, signer);
+    if (swapDir) {
+      st('swapSt','Подтверди транзакцию в MetaMask...','wait');
+      btn.className='main-btn btn-wait'; btn.textContent='Pending...';
+      const tx = await swap.swapNativeToESP({value:amt});
+      st('swapSt','Транзакция отправлена...','wait');
+      await tx.wait();
+      st('swapSt','✅ Своп выполнен!','ok');
+    } else {
+      const esp = new ethers.Contract(CFG.ESP_TOKEN, ERC20_ABI, signer);
+      if (await esp.allowance(userAddr, CFG.SWAP) < amt) {
+        st('swapSt','Шаг 1/2: Approve ESP...','wait');
+        btn.className='main-btn btn-wait'; btn.textContent='Approving...';
+        await (await esp.approve(CFG.SWAP, amt*2n)).wait();
+      }
+      st('swapSt','Шаг 2/2: Подтверди своп...','wait');
+      btn.className='main-btn btn-wait'; btn.textContent='Pending...';
+      await (await swap.swapESPToNative(amt)).wait();
+      st('swapSt','✅ Своп выполнен!','ok');
+    }
+    document.getElementById('payAmt').value='';
+    onInput(); refreshWallet();
+  } catch(e) { st('swapSt','❌ '+(e.reason||e.message||'Ошибка'),'err'); }
+  updateSwapBtn();
+}
+
+// ══════════════════════════════════════════
+// NFT
+// ══════════════════════════════════════════
+async function refreshNft() {
+  if (!userAddr) return;
+  const net   = await provider.getNetwork();
+  const chain = '0x'+net.chainId.toString(16);
+  const warn  = document.getElementById('nftWarn');
+
+  if (chain.toLowerCase()===CFG.LITVM_ID.toLowerCase()) {
+    warn.style.display='none';
+    if (!CFG.TEST_NFT.startsWith('ВСТАВЬ')) {
+      const nft = new ethers.Contract(CFG.TEST_NFT, FREE_NFT_ABI, provider);
+      const cnt = await nft.mintedCount(userAddr);
+      document.getElementById('freeCnt').textContent = 'Заминчено: '+cnt+' / 3';
+    }
+  }
+  // Paid NFT тоже на LitVM — загружаем данные
+  if (chain.toLowerCase()===CFG.LITVM_ID.toLowerCase()) {
+    if (!CFG.PAID_NFT.startsWith('ВСТАВЬ')) {
+      const nft   = new ethers.Contract(CFG.PAID_NFT, PAID_NFT_ABI, provider);
+      const cnt   = await nft.mintedCount(userAddr);
+      const price = await nft.mintPrice();
+      document.getElementById('paidCnt').textContent       = 'Заминчено: '+cnt;
+      document.getElementById('paidPriceLabel').textContent = fmt(price)+' zkLTC (~$0.9)';
+    }
+  }
+  if (chain.toLowerCase() !== CFG.LITVM_ID.toLowerCase()) {
+    warn.style.display='block';
+    warn.textContent = '⚠️ Переключи MetaMask на LitVM Testnet для минта NFT';
+  }
+}
+
+async function mintFree() {
+  if (!userAddr) { connectWallet(); return; }
+  const net = await provider.getNetwork();
+  if ('0x'+net.chainId.toString(16) !== CFG.LITVM_ID.toLowerCase()) {
+    try { st('nftSt','Переключаем на LitVM...','wait'); await switchNet(CFG.LITVM_ID, CFG.LITVM_NET); }
+    catch { st('nftSt','Ошибка сети','err'); return; }
+  }
+  const btn = document.getElementById('freeBtn');
+  try {
+    btn.disabled=true;
+    st('nftSt','Подтверди в MetaMask...','wait');
+    const nft = new ethers.Contract(CFG.TEST_NFT, FREE_NFT_ABI, signer);
+    const tx  = await nft.mint();
+    st('nftSt','Минт...','wait');
+    await tx.wait();
+    st('nftSt','✅ NFT заминчен! Проверь в кошельке.','ok');
+    refreshNft();
+  } catch(e) { st('nftSt','❌ '+(e.reason||e.message),'err'); }
+  btn.disabled=false;
+}
+
+async function mintPaid() {
+  if (!userAddr) { connectWallet(); return; }
+  // Оба NFT на LitVM Testnet
+  const net = await provider.getNetwork();
+  if ('0x'+net.chainId.toString(16) !== CFG.LITVM_ID.toLowerCase()) {
+    try { st('nftSt','Переключаем на LitVM Testnet...','wait'); await switchNet(CFG.LITVM_ID, CFG.LITVM_NET); }
+    catch { st('nftSt','Ошибка переключения сети','err'); return; }
+  }
+  const btn = document.getElementById('paidBtn');
+  try {
+    btn.disabled=true;
+    const nft   = new ethers.Contract(CFG.PAID_NFT, PAID_NFT_ABI, signer);
+    const price = await nft.mintPrice();
+    st('nftSt','Подтверди в MetaMask ('+fmt(price)+' zkLTC)...','wait');
+    const tx = await nft.mint(1,{value:price});
+    st('nftSt','Транзакция...','wait');
+    await tx.wait();
+    st('nftSt','✅ NFT заминчен!','ok');
+    refreshNft();
+  } catch(e) { st('nftSt','❌ '+(e.reason||e.message),'err'); }
+  btn.disabled=false;
+}
+
+// ══════════════════════════════════════════
+// LIQUIDITY
+// ══════════════════════════════════════════
+async function loadPool() {
+  if (!provider||CFG.SWAP.startsWith('ВСТАВЬ')) return;
+  try {
+    const swap = new ethers.Contract(CFG.SWAP, SWAP_ABI, provider);
+    const [r0,r1] = await swap.getReserves();
+    document.getElementById('resNative').textContent = fmt(r0)+' zkLTC';
+    document.getElementById('resESP').textContent    = fmt(r1)+' ESP';
+    if (userAddr) {
+      const lp = await swap.lpBalance(userAddr);
+      document.getElementById('myLP').textContent = fmt(lp);
+    }
+  } catch { document.getElementById('resNative').textContent='Ошибка'; }
+}
+
+async function addLiq() {
+  if (!userAddr) { connectWallet(); return; }
+  const n = document.getElementById('liqNative').value;
+  const e = document.getElementById('liqESP').value;
+  if (!n||!e) { st('liqSt','Введи оба значения','err'); return; }
+  try {
+    const esp  = new ethers.Contract(CFG.ESP_TOKEN, ERC20_ABI, signer);
+    const swap = new ethers.Contract(CFG.SWAP, SWAP_ABI, signer);
+    const eWei = ethers.parseEther(e);
+    const nWei = ethers.parseEther(n);
+    st('liqSt','Approve ESP...','wait');
+    await (await esp.approve(CFG.SWAP, eWei)).wait();
+    st('liqSt','Добавляем ликвидность...','wait');
+    await (await swap.addLiquidity(eWei,{value:nWei})).wait();
+    st('liqSt','✅ Ликвидность добавлена!','ok');
+    loadPool();
+  } catch(e) { st('liqSt','❌ '+(e.reason||e.message),'err'); }
+}
+</script>
+
+
+</body></html>
