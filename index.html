@@ -12,12 +12,11 @@
   --border:#1a3a5c;--border2:#2a5a8c;
   --text:#e2f0ff;--muted:#4a90d9;--dim:#1a3a5c;
   --green:#22c55e;--red:#ef4444;--amber:#f59e0b;
-  --accent1:#1a6abf;--accent2:#0f4a9c;
 }
 body{background:var(--bg);color:var(--text);font-family:'Segoe UI',sans-serif;min-height:100vh}
 nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-icon{width:38px;height:38px;background:linear-gradient(135deg,#1a6abf,#0d3a8c);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#a0d4ff;letter-spacing:-0.5px}
+.logo-icon{width:38px;height:38px;background:linear-gradient(135deg,#1a6abf,#0d3a8c);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#a0d4ff}
 .logo-text{font-size:17px;font-weight:700;color:var(--text)}
 .logo-sub{font-size:10px;color:var(--muted);margin-top:1px}
 .nav-links{display:flex;gap:2px}
@@ -54,7 +53,7 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 28
 .recv-val{font-size:26px;font-weight:600;color:var(--muted);min-height:34px;display:flex;align-items:center}
 .dash{width:30px;height:3px;background:#1a3a5c;border-radius:2px}
 .rate-line{display:flex;justify-content:space-between;font-size:12px;color:#3a6a9a;margin:12px 4px 4px}
-.main-btn{width:100%;padding:15px;border-radius:14px;border:none;font-size:15px;font-weight:700;cursor:pointer;transition:all .15s;margin-top:12px;letter-spacing:.2px}
+.main-btn{width:100%;padding:15px;border-radius:14px;border:none;font-size:15px;font-weight:700;cursor:pointer;transition:all .15s;margin-top:12px}
 .btn-off{background:#152a45;color:#3a6a9a;cursor:not-allowed}
 .btn-connect{background:linear-gradient(135deg,#1a5a9c,#0f3a7c);color:#a0d4ff}
 .btn-connect:hover{opacity:.85}
@@ -63,7 +62,9 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 28
 .btn-wait{background:#152a45;color:#5a8aaa;cursor:wait}
 .nft-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .nft-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px;text-align:center;display:flex;flex-direction:column;align-items:center}
-.nft-art{width:100%;aspect-ratio:1;border-radius:12px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;font-size:44px;background:var(--card);border:1px solid var(--border)}
+.nft-art{width:100%;aspect-ratio:1;border-radius:12px;margin-bottom:14px;overflow:hidden;background:var(--card);border:1px solid var(--border)}
+.nft-art img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+.nft-art-emoji{width:100%;aspect-ratio:1;border-radius:12px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;font-size:44px;background:var(--card);border:1px solid var(--border)}
 .nft-name{font-size:14px;font-weight:700;margin-bottom:5px}
 .nft-desc{font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.55}
 .nft-price{font-size:13px;font-weight:700;margin-bottom:13px}
@@ -96,8 +97,8 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 28
   .mob-btn.active{background:#1a3a5c;color:var(--text)}
 }
 </style>
-</head>  
-  <body>
+</head>
+<body>
 <nav>
   <a class="logo" href="#">
     <div class="logo-icon">ES</div>
@@ -166,7 +167,9 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 28
     <div class="net-warn" id="nftWarn"></div>
     <div class="nft-grid">
       <div class="nft-card">
-        <div class="nft-art">🎨</div>
+        <div class="nft-art">
+          <img src="https://ipfs.io/ipfs/bafkreiezzeeol7ucbg7gm3mmfq6xi46wuwr26xmee2n6tssmhi3bq4zk5e" alt="Easy Swap Genesis NFT">
+        </div>
         <div class="nft-name">Easy Swap NFT</div>
         <div class="nft-desc">Тестовый минт на LitVM Testnet. Бесплатно!</div>
         <div class="nft-price price-free">FREE</div>
@@ -174,7 +177,7 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 28
         <div class="nft-count" id="freeCnt"></div>
       </div>
       <div class="nft-card">
-        <div class="nft-art">💎</div>
+        <div class="nft-art-emoji">💎</div>
         <div class="nft-name">Easy Swap NFT</div>
         <div class="nft-desc">Минт на BNB Mainnet. Оплата в BNB (~$0.9)</div>
         <div class="nft-price price-paid" id="paidPriceLabel">~$0.9 в BNB</div>
@@ -280,7 +283,7 @@ async function connectWallet() {
     window.ethereum.on('accountsChanged', a=>{userAddr=a[0];refreshWallet();});
     window.ethereum.on('chainChanged', ()=>location.reload());
     await refreshWallet();
-  } catch(e) { alert("Ошибка подключения: " + e.message); }
+  } catch(e) { alert("Ошибка: " + e.message); }
 }
 
 async function refreshWallet() {
@@ -333,7 +336,6 @@ function setPct(p) {
   document.getElementById('payAmt').value=parseFloat(ethers.formatEther((nativeBal*BigInt(p))/100n)).toFixed(6);
   onInput();
 }
-
 function flipDir() {
   swapDir=!swapDir;
   document.getElementById('payAmt').value='';
@@ -341,7 +343,6 @@ function flipDir() {
   document.getElementById('rateLine').style.display='none';
   updateSwapBtn();
 }
-
 function updateSwapBtn() {
   const btn=document.getElementById('swapBtn');
   const v=parseFloat(document.getElementById('payAmt').value);
@@ -349,7 +350,6 @@ function updateSwapBtn() {
   if (!v||v<=0){btn.textContent='Enter amount';btn.className='main-btn btn-off';return;}
   btn.textContent='Swap';btn.className='main-btn btn-go';
 }
-
 async function doSwap() {
   if (!userAddr){connectWallet();return;}
   const v=parseFloat(document.getElementById('payAmt').value);
@@ -367,7 +367,6 @@ async function doSwap() {
       st('swapSt','Подтверди в MetaMask...','wait');
       btn.className='main-btn btn-wait';btn.textContent='Pending...';
       const tx=await swap.swapNativeToESP({value:amt});
-      st('swapSt','Отправлено...','wait');
       await tx.wait();
       st('swapSt','✅ Своп выполнен!','ok');
     } else {
@@ -395,18 +394,18 @@ async function refreshNft() {
   const warn=document.getElementById('nftWarn');
   warn.style.display='none';
   if (chain.toLowerCase()===CFG.LITVM_ID.toLowerCase()) {
-    if (!CFG.TEST_NFT.startsWith('ВСТАВЬ')) {
+    try {
       const nft=new ethers.Contract(CFG.TEST_NFT,FREE_NFT_ABI,provider);
       const cnt=await nft.mintedCount(userAddr);
       document.getElementById('freeCnt').textContent='Заминчено: '+cnt;
-    }
-    if (!CFG.PAID_NFT.startsWith('ВСТАВЬ')) {
+    } catch{}
+    try {
       const nft=new ethers.Contract(CFG.PAID_NFT,PAID_NFT_ABI,provider);
       const cnt=await nft.mintedCount(userAddr);
       const price=await nft.mintPrice();
       document.getElementById('paidCnt').textContent='Заминчено: '+cnt;
       document.getElementById('paidPriceLabel').textContent=fmt(price)+' zkLTC (~$0.9)';
-    }
+    } catch{}
   } else {
     warn.style.display='block';
     warn.textContent='⚠️ Переключи MetaMask на LitVM LiteForge для минта NFT';
