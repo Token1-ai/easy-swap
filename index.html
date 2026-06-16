@@ -15,6 +15,8 @@
   --gold:#f59e0b;--gold2:#fbbf24;--purple:#a855f7;
 }
 body{background:var(--bg);color:var(--text);font-family:'Segoe UI',sans-serif;min-height:100vh}
+
+/* NAV */
 nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;position:sticky;top:0;z-index:100}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .logo-icon{width:38px;height:38px;background:linear-gradient(135deg,#1a6abf,#0d3a8c);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#a0d4ff}
@@ -23,9 +25,6 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
 .nav-links{display:flex;gap:2px;align-items:center}
 .nav-link{color:var(--muted);text-decoration:none;padding:7px 14px;border-radius:9px;font-size:14px;cursor:pointer;transition:all .15s;border:none;background:none}
 .nav-link.active,.nav-link:hover{background:#1a3a5c;color:var(--text)}
-.nav-link-gate{color:#f59e0b!important;font-weight:700;}
-.nav-link-gate:hover{background:#2a1500!important;color:#fbbf24!important}
-.nav-link-gate.active{background:#2a1500!important;color:#fbbf24!important}
 .twitter-link{display:flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;padding:7px 12px;border-radius:9px;font-size:13px;transition:all .15s;border:1px solid var(--border)}
 .twitter-link:hover{background:#1a3a5c;color:#1d9bf0;border-color:#1d9bf0}
 .wallet-btn{background:#1a3a5c;border:1px solid var(--border2);color:var(--muted);padding:9px 18px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:500;transition:all .15s;white-space:nowrap}
@@ -35,9 +34,28 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
 .net-litvm{background:#0a2a4c;color:#4a90d9}
 .net-bnb{background:#2a1a00;color:#f59e0b}
 .net-other{background:#2a0a0a;color:#ef4444}
+
+/* WALLET PICKER */
+.wmodal-bg{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:none;align-items:center;justify-content:center}
+.wmodal-bg.open{display:flex}
+.wmodal{background:#0d1f35;border:1px solid #2a5a8c;border-radius:20px;padding:28px;width:340px;max-width:92vw;position:relative}
+.wmodal h3{font-size:18px;font-weight:700;margin-bottom:5px}
+.wmodal p{font-size:12px;color:#3a6a9a;margin-bottom:18px}
+.wmodal-close{position:absolute;top:14px;right:14px;background:#1a3a5c;border:none;color:#4a90d9;width:28px;height:28px;border-radius:8px;cursor:pointer;font-size:14px}
+.wopt{display:flex;align-items:center;gap:14px;background:#091525;border:1px solid #1a3a5c;border-radius:14px;padding:14px 16px;cursor:pointer;transition:all .15s;margin-bottom:10px;width:100%;text-align:left}
+.wopt:hover{border-color:#2a5a8c;background:#0f2035}
+.wopt-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.wopt-mm{background:linear-gradient(135deg,#e2761b,#c55400)}
+.wopt-tw{background:linear-gradient(135deg,#3375bb,#0d5ab8)}
+.wopt-name{font-size:14px;font-weight:700;color:var(--text)}
+.wopt-desc{font-size:11px;color:#3a6a9a;margin-top:2px}
+
+/* PANELS */
 .panel{display:none}
 .panel.active{display:block}
 .page{max-width:560px;margin:0 auto;padding:28px 20px 60px}
+
+/* HERO */
 .hero{background:linear-gradient(180deg,#08111e 0%,#0a1828 100%);padding:60px 20px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
 .hero-bg{position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 0%,rgba(26,106,191,0.15) 0%,transparent 70%);pointer-events:none}
 .hero-badge{display:inline-flex;align-items:center;gap:6px;background:#0a1828;border:1px solid var(--border2);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--muted);margin-bottom:20px}
@@ -54,13 +72,15 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
 .hero-btn-gold:hover{opacity:.85;transform:translateY(-1px)}
 .hero-btn-outline{background:transparent;border:1px solid var(--border2);color:var(--muted)}
 .hero-btn-outline:hover{background:#1a3a5c;color:var(--text)}
-.hero-btn-gate{background:linear-gradient(135deg,#d97706,#b45309);color:#fde68a;border:2px solid #f59e0b}
-.hero-btn-gate:hover{opacity:.85;transform:translateY(-1px)}
+
+/* STATS BAR */
 .stats-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 20px}
 .stats-inner{max-width:800px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .stat-item{text-align:center}
 .stat-val{font-size:20px;font-weight:700;color:var(--text)}
 .stat-lbl{font-size:11px;color:#3a6a9a;margin-top:3px}
+
+/* FEATURES */
 .features{padding:50px 20px;max-width:800px;margin:0 auto}
 .section-title{font-size:28px;font-weight:700;text-align:center;margin-bottom:8px}
 .section-sub{font-size:14px;color:#3a6a9a;text-align:center;margin-bottom:36px}
@@ -69,8 +89,12 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
 .feature-icon{font-size:28px;margin-bottom:12px}
 .feature-title{font-size:15px;font-weight:700;margin-bottom:6px}
 .feature-desc{font-size:12px;color:#3a6a9a;line-height:1.6}
+
+/* NFT SECTION */
 .nft-section{padding:50px 20px;background:linear-gradient(180deg,#08111e,#0a1020)}
 .nft-section-inner{max-width:900px;margin:0 auto}
+
+/* GOLD CARD */
 .gold-highlight{background:linear-gradient(135deg,#1a0f00,#0d0900);border:1px solid #92400e;border-radius:20px;padding:28px;margin-bottom:24px;position:relative;overflow:hidden}
 .gold-highlight::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#f59e0b,transparent)}
 .gold-highlight-top{display:flex;align-items:center;gap:20px;margin-bottom:20px}
@@ -93,6 +117,8 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
 .gold-supply span{color:var(--gold);font-weight:700}
 .gold-mint-btn{background:linear-gradient(135deg,#d97706,#92400e);color:#fde68a;border:none;padding:13px 28px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
 .gold-mint-btn:hover{opacity:.85}
+
+/* NFT GRID */
 .nft-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .nft-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
 .nft-art{width:100%;aspect-ratio:1;overflow:hidden;background:var(--card);flex-shrink:0}
@@ -133,11 +159,15 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
 .nft-count{font-size:9px;color:#3a6a9a;margin-top:5px;text-align:center}
 .nft-count.green-count{color:#14532d}
 .nft-count.bnb-count{color:#5a3a00}
+
+/* TWITTER CTA */
 .twitter-cta{background:linear-gradient(135deg,#0a1828,#0d1f35);border:1px solid #1d3a5c;border-radius:20px;padding:28px;text-align:center;margin:0 20px 40px;max-width:860px;margin-left:auto;margin-right:auto}
 .twitter-cta h3{font-size:20px;font-weight:700;margin-bottom:8px}
 .twitter-cta p{font-size:13px;color:#3a6a9a;margin-bottom:20px;line-height:1.6}
 .twitter-follow-btn{display:inline-flex;align-items:center;gap:8px;background:#1d9bf0;color:white;border:none;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .15s}
 .twitter-follow-btn:hover{background:#1a8cd8}
+
+/* SWAP UI */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px;margin-bottom:16px}
 .card-title{font-size:17px;font-weight:600;margin-bottom:20px;color:var(--text)}
 .tok-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
@@ -151,7 +181,6 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
 .tok-icon{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#fff;flex-shrink:0}
 .icon-zk{background:linear-gradient(135deg,#2a6abf,#1a4a9c)}
 .icon-esp{background:linear-gradient(135deg,#1a9e75,#0f6e56)}
-.icon-gate{background:linear-gradient(135deg,#d97706,#92400e)}
 .tok-name{font-size:14px;font-weight:700;color:var(--text)}
 .pct-row{display:flex;gap:6px;margin-top:12px}
 .pct-btn{flex:1;background:#152a45;border:1px solid var(--border);border-radius:8px;color:var(--muted);font-size:12px;padding:4px 0;cursor:pointer;transition:all .15s}
@@ -173,9 +202,11 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
 .btn-gold:hover{opacity:.85}
 .btn-purple{background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#e9d5ff}
 .btn-purple:hover{opacity:.85}
+
+/* NET WARN */
 .net-warn{background:#2a0a00;border:1px solid #6a2a00;border-radius:10px;padding:10px 14px;font-size:12px;color:#f08060;margin-bottom:12px;text-align:center;line-height:1.5;display:none}
-.gate-info-box{background:#1a0f00;border:1px solid #3a2000;border-radius:10px;padding:14px 18px;margin-bottom:16px;font-size:12px;color:#c08030;line-height:1.8}
-.gate-info-box span{color:#f59e0b;font-weight:700}
+
+/* TOKEN FACTORY */
 .form-group{margin-bottom:16px}
 .form-label{font-size:12px;color:var(--muted);margin-bottom:6px;display:block;font-weight:600}
 .form-hint{font-size:10px;color:#3a6a9a;margin-top:4px}
@@ -202,23 +233,77 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
 .token-item-addr{font-size:10px;color:#3a6a9a;margin-top:2px}
 .token-item-copy{background:none;border:1px solid var(--border);border-radius:6px;color:#3a6a9a;padding:4px 8px;font-size:10px;cursor:pointer;transition:all .15s}
 .token-item-copy:hover{border-color:var(--border2);color:var(--muted)}
+
+/* POOL */
 .pool-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
 .pool-stat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center}
 .pool-val{font-size:15px;font-weight:600;color:var(--text)}
 .pool-lbl{font-size:10px;color:var(--muted);margin-top:3px}
+
+/* STATUS */
 .status{border-radius:11px;padding:10px 15px;font-size:12px;text-align:center;margin-top:8px;display:none}
 .status.show{display:block}
 .status.ok{background:#0a2a15;border:1px solid #1a5a2c;color:var(--green)}
 .status.err{background:#2a0a0a;border:1px solid #5a1a1a;color:var(--red)}
 .status.wait{background:#1a1500;border:1px solid #4a3a00;color:var(--amber)}
+
+/* ===== PROFILE ===== */
+.profile-header{background:linear-gradient(135deg,#0d1f35,#091525);border:1px solid var(--border);border-radius:20px;padding:24px;margin-bottom:16px}
+.profile-addr{font-size:13px;color:#4a90d9;word-break:break-all;margin-bottom:14px;font-family:monospace}
+.profile-balances{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.profile-bal{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+.profile-bal-val{font-size:20px;font-weight:700;color:var(--text)}
+.profile-bal-lbl{font-size:10px;color:#3a6a9a;margin-top:3px}
+.vip-row{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#1a0f00,#2a1500);border:1px solid #92400e;border-radius:12px;padding:12px 16px}
+.vip-row-icon{font-size:22px}
+.vip-row-title{font-size:13px;font-weight:700;color:var(--gold)}
+.vip-row-sub{font-size:11px;color:#78350f}
+.profile-nfts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:6px}
+.pnft-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.pnft-img{width:100%;aspect-ratio:1;overflow:hidden}
+.pnft-img img{width:100%;height:100%;object-fit:cover}
+.pnft-body{padding:10px}
+.pnft-name{font-size:12px;font-weight:700;color:var(--text)}
+.pnft-count{font-size:10px;color:var(--muted);margin-top:2px}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center}
+.stat-box-val{font-size:18px;font-weight:700;color:var(--text)}
+.stat-box-lbl{font-size:10px;color:#3a6a9a;margin-top:3px}
+
+/* ===== LIVE FEED ===== */
+.feed-list{display:flex;flex-direction:column;gap:8px}
+.feed-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:12px;animation:feedIn .3s ease}
+@keyframes feedIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.feed-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.feed-icon.fi-swap{background:#0f3a2c}
+.feed-icon.fi-mint{background:#2a1500}
+.feed-icon.fi-token{background:#2d1a4a}
+.feed-icon.fi-liq{background:#0a2a4c}
+.feed-body{flex:1;min-width:0}
+.feed-title{font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.feed-sub{font-size:10px;color:#3a6a9a;margin-top:2px}
+.feed-time{font-size:10px;color:#2a4a6a;flex-shrink:0}
+
+/* ===== LEADERBOARD ===== */
+.lb-tabs{display:flex;gap:6px;margin-bottom:16px}
+.lb-tab{flex:1;padding:9px;border-radius:10px;border:1px solid var(--border);background:var(--card);color:#3a6a9a;font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:all .15s}
+.lb-tab.active{border-color:var(--border2);background:#152a45;color:var(--text)}
+.lb-row{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:8px}
+.lb-rank{width:26px;height:26px;border-radius:8px;background:#1a3a5c;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#4a90d9;flex-shrink:0}
+.lb-rank.top1{background:linear-gradient(135deg,#d97706,#92400e);color:#fde68a}
+.lb-rank.top2{background:#1a2a3a;color:#94a3b8}
+.lb-rank.top3{background:#2a1a0a;color:#cd7c2a}
+.lb-addr{flex:1;font-size:12px;color:var(--muted);font-family:monospace}
+.lb-val{font-size:13px;font-weight:700;color:var(--text)}
+.lb-badge{font-size:10px;color:var(--gold);margin-left:6px}
+
+/* MOBILE */
 .mob-nav{display:none;gap:3px;padding:12px 16px 0;max-width:560px;margin:0 auto;flex-wrap:wrap}
 @media(max-width:700px){
   nav .nav-links{display:none}
   .mob-nav{display:flex}
-  .mob-btn{flex:1;min-width:70px;padding:8px 4px;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--muted);cursor:pointer;font-size:11px;font-weight:500;text-align:center;text-decoration:none}
+  .mob-btn{flex:1;min-width:60px;padding:8px 4px;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--muted);cursor:pointer;font-size:10px;font-weight:500;text-align:center;text-decoration:none}
   .mob-btn.active{background:#1a3a5c;color:var(--text)}
-  .mob-btn-gate{color:#f59e0b!important}
-  .mob-btn-gate.active{background:#2a1500!important}
   .nft-grid-3{grid-template-columns:1fr}
   .features-grid{grid-template-columns:1fr}
   .gold-benefits{grid-template-columns:1fr}
@@ -226,10 +311,49 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
   .stats-inner{grid-template-columns:repeat(2,1fr)}
   .form-row{grid-template-columns:1fr}
   .hero h1{font-size:28px}
+  .profile-nfts{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
+
+
+<!-- WALLET MODAL -->
+<div id="wmodalBg" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;align-items:center;justify-content:center">
+  <div style="background:#0d1f35;border:1px solid #2a5a8c;border-radius:20px;padding:28px;width:320px;max-width:92vw;position:relative">
+    <button onclick="closeWModal()" style="position:absolute;top:12px;right:12px;background:#1a3a5c;border:none;color:#4a90d9;width:28px;height:28px;border-radius:8px;cursor:pointer;font-size:14px">✕</button>
+    <div style="font-size:18px;font-weight:700;margin-bottom:5px;color:#e2f0ff">Connect Wallet</div>
+    <div style="font-size:12px;color:#3a6a9a;margin-bottom:12px">Choose your wallet</div>
+    <div id="wErr" style="display:none;background:#2a0a0a;border:1px solid #5a1a1a;border-radius:10px;padding:10px 14px;font-size:12px;color:#ef4444;margin-bottom:12px;line-height:1.6"></div>
+    <button onclick="connectMM()" style="display:flex;align-items:center;gap:14px;background:#091525;border:1px solid #1a3a5c;border-radius:14px;padding:14px 16px;cursor:pointer;width:100%;margin-bottom:10px;transition:all .15s" onmouseover="this.style.borderColor='#2a5a8c'" onmouseout="this.style.borderColor='#1a3a5c'">
+      <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#e2761b,#c55400);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🦊</div>
+      <div style="text-align:left"><div style="font-size:14px;font-weight:700;color:#e2f0ff">MetaMask</div><div style="font-size:11px;color:#3a6a9a;margin-top:2px">Browser extension</div></div>
+    </button>
+    <button onclick="connectTW()" style="display:flex;align-items:center;gap:14px;background:#091525;border:1px solid #1a3a5c;border-radius:14px;padding:14px 16px;cursor:pointer;width:100%;transition:all .15s" onmouseover="this.style.borderColor='#2a5a8c'" onmouseout="this.style.borderColor='#1a3a5c'">
+      <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#3375bb,#0d5ab8);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🛡️</div>
+      <div style="text-align:left"><div style="font-size:14px;font-weight:700;color:#e2f0ff">Trust Wallet</div><div style="font-size:11px;color:#3a6a9a;margin-top:2px">Mobile & browser</div></div>
+    </button>
+  </div>
+</div>
+
+<!-- WALLET MODAL -->
+<div id="wmodalBg" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;align-items:center;justify-content:center">
+  <div style="background:#0d1f35;border:1px solid #2a5a8c;border-radius:20px;padding:28px;width:320px;max-width:92vw;position:relative">
+    <button onclick="closeWModal()" style="position:absolute;top:12px;right:12px;background:#1a3a5c;border:none;color:#4a90d9;width:28px;height:28px;border-radius:8px;cursor:pointer;font-size:14px">✕</button>
+    <div style="font-size:18px;font-weight:700;margin-bottom:5px;color:#e2f0ff">Connect Wallet</div>
+    <div style="font-size:12px;color:#3a6a9a;margin-bottom:12px">Choose your wallet</div>
+    <div id="wErr" style="display:none;background:#2a0a0a;border:1px solid #5a1a1a;border-radius:10px;padding:10px 14px;font-size:12px;color:#ef4444;margin-bottom:12px;line-height:1.6"></div>
+    <button onclick="connectMM()" style="display:flex;align-items:center;gap:14px;background:#091525;border:1px solid #1a3a5c;border-radius:14px;padding:14px 16px;cursor:pointer;width:100%;margin-bottom:10px;transition:all .15s" onmouseover="this.style.borderColor='#2a5a8c'" onmouseout="this.style.borderColor='#1a3a5c'">
+      <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#e2761b,#c55400);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🦊</div>
+      <div style="text-align:left"><div style="font-size:14px;font-weight:700;color:#e2f0ff">MetaMask</div><div style="font-size:11px;color:#3a6a9a;margin-top:2px">Browser extension</div></div>
+    </button>
+    <button onclick="connectTW()" style="display:flex;align-items:center;gap:14px;background:#091525;border:1px solid #1a3a5c;border-radius:14px;padding:14px 16px;cursor:pointer;width:100%;transition:all .15s" onmouseover="this.style.borderColor='#2a5a8c'" onmouseout="this.style.borderColor='#1a3a5c'">
+      <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#3375bb,#0d5ab8);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🛡️</div>
+      <div style="text-align:left"><div style="font-size:14px;font-weight:700;color:#e2f0ff">Trust Wallet</div><div style="font-size:11px;color:#3a6a9a;margin-top:2px">Mobile & browser</div></div>
+    </button>
+  </div>
+</div>
+
 <nav>
   <a class="logo" href="#" onclick="showTab('home',this)">
     <div class="logo-icon">ES</div>
@@ -244,19 +368,23 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
     <button class="nav-link" onclick="showTab('nft',this)">Mint NFT</button>
     <button class="nav-link" onclick="showTab('create',this)">Create Token</button>
     <button class="nav-link" onclick="showTab('liquidity',this)">Liquidity</button>
-    <button class="nav-link nav-link-gate" onclick="showTab('gate',this)">🟡 Buy GATE</button>
+    <button class="nav-link" onclick="showTab('profile',this)">Profile</button>
+    <button class="nav-link" onclick="showTab('feed',this)">Live</button>
+    <button class="nav-link" onclick="showTab('leaderboard',this)">Top</button>
     <a class="twitter-link" href="https://x.com/EasySwapLike1" target="_blank">𝕏 Twitter</a>
   </div>
-  <button class="wallet-btn" id="walletBtn" onclick="connectWallet()">Connect Wallet</button>
+  <button class="wallet-btn" id="walletBtn" onclick="openWModal()">Connect Wallet</button>
 </nav>
 
 <div class="mob-nav">
   <button class="mob-btn active" onclick="showTab('home',this)">Home</button>
   <button class="mob-btn" onclick="showTab('swap',this)">Swap</button>
-  <button class="mob-btn" onclick="showTab('nft',this)">Mint NFT</button>
+  <button class="mob-btn" onclick="showTab('nft',this)">NFT</button>
   <button class="mob-btn" onclick="showTab('create',this)">Create</button>
-  <button class="mob-btn" onclick="showTab('liquidity',this)">Liquidity</button>
-  <button class="mob-btn mob-btn-gate" onclick="showTab('gate',this)">🟡 GATE</button>
+  <button class="mob-btn" onclick="showTab('liquidity',this)">Pool</button>
+  <button class="mob-btn" onclick="showTab('profile',this)">👤</button>
+  <button class="mob-btn" onclick="showTab('feed',this)">Live</button>
+  <button class="mob-btn" onclick="showTab('leaderboard',this)">Top</button>
   <a class="mob-btn" href="https://x.com/EasySwapLike1" target="_blank">𝕏</a>
 </div>
 
@@ -270,7 +398,7 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
     <div class="hero-btns">
       <button class="hero-btn hero-btn-primary" onclick="showTab('swap',document.querySelector('.nav-link'))">Start Swapping</button>
       <button class="hero-btn hero-btn-gold" onclick="showTab('nft',document.querySelectorAll('.nav-link')[2])">Get Gold Pass</button>
-      <button class="hero-btn hero-btn-gate" onclick="showTab('gate',document.querySelectorAll('.nav-link')[5])">🟡 Buy GATE</button>
+      <button class="hero-btn hero-btn-outline" onclick="showTab('create',document.querySelectorAll('.nav-link')[3])">Create Token</button>
     </div>
   </div>
   <div class="stats-bar">
@@ -286,9 +414,9 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
     <div class="section-sub">A complete DeFi ecosystem on LitVM LiteForge</div>
     <div class="features-grid">
       <div class="feature-card"><div class="feature-icon">⚡</div><div class="feature-title">Instant Token Swap</div><div class="feature-desc">Swap zkLTC ↔ ESP instantly with our AMM pool. Low fees, fast transactions on LitVM LiteForge.</div></div>
-      <div class="feature-card"><div class="feature-icon">🟡</div><div class="feature-title">Buy GATE Token</div><div class="feature-desc">Buy GATE — the social token of OpenGate platform. Earn by posting, stake for rewards, 2× bonus with Gold Pass.</div></div>
       <div class="feature-card"><div class="feature-icon">🎨</div><div class="feature-title">Exclusive NFTs</div><div class="feature-desc">Mint free Genesis & Limited passes, or get the rare Gold Pass and Early Access Pass with real benefits.</div></div>
-      <div class="feature-card"><div class="feature-icon">🪙</div><div class="feature-title">Token Factory</div><div class="feature-desc">Launch your own ERC-20 token in 60 seconds. Choose Mintable, Burnable, Pausable options.</div></div>
+      <div class="feature-card"><div class="feature-icon">🪙</div><div class="feature-title">Token Factory</div><div class="feature-desc">Launch your own ERC-20 token in 60 seconds. Choose Mintable, Burnable, Pausable options. Currently free on testnet.</div></div>
+      <div class="feature-card"><div class="feature-icon">🚀</div><div class="feature-title">Mainnet Ready</div><div class="feature-desc">When LitVM hits mainnet, Gold Pass holders create tokens for free forever. Early supporters get the best deal.</div></div>
     </div>
   </div>
   <div class="nft-section">
@@ -308,7 +436,7 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
           <div class="gold-benefit"><div class="gold-benefit-icon">♾️</div><div><div class="gold-benefit-title">Lifetime Free Token Creation</div><div class="gold-benefit-text">Create unlimited tokens on mainnet with zero fees — forever.</div></div></div>
           <div class="gold-benefit"><div class="gold-benefit-icon">🔒</div><div><div class="gold-benefit-title">Only 3,000 Exist</div><div class="gold-benefit-text">Once all 3,000 Gold Passes are claimed, no more will ever be created.</div></div></div>
           <div class="gold-benefit"><div class="gold-benefit-icon">📈</div><div><div class="gold-benefit-title">Scarcity = Value</div><div class="gold-benefit-text">As Easy Swap grows, the Gold Pass becomes more valuable.</div></div></div>
-          <div class="gold-benefit"><div class="gold-benefit-icon">🟡</div><div><div class="gold-benefit-title">2× GATE Rewards</div><div class="gold-benefit-text">Gold Pass holders earn double GATE rewards on OpenGate platform.</div></div></div>
+          <div class="gold-benefit"><div class="gold-benefit-icon">🤝</div><div><div class="gold-benefit-title">VIP Status</div><div class="gold-benefit-text">Be recognized as a founding supporter. VIP list recorded on-chain.</div></div></div>
         </div>
         <div class="gold-bottom">
           <div>
@@ -321,9 +449,18 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
       <div style="padding:0 20px">
         <div class="section-sub" style="text-align:left;margin-bottom:16px">More NFTs</div>
         <div class="nft-grid-3">
-          <div class="nft-card bnb-card"><div class="nft-art"><img src="https://ipfs.io/ipfs/bafkreif43gg4azducogrhionfswumt24hvgl37z7ldv67p3acagxibajya" alt="Early Access"></div><div class="nft-body"><div class="nft-badge badge-limited">💎 BNB PASS</div><div class="nft-name">Early Access Pass</div><div class="nft-desc">Whitelist spot for ESP token presale.</div><div class="nft-price price-paid">~$0.90 in BNB</div><div class="nft-supply amber-supply">20,000 total</div><button class="nft-btn nft-btn-paid" onclick="showTab('nft',document.querySelectorAll('.nav-link')[2])">Get Access</button></div></div>
-          <div class="nft-card green-card"><div class="nft-art"><img src="https://ipfs.io/ipfs/bafkreibfe7fu247y3mixrtkebldxlbmjb2pj22pglz7fucxhqy4lqkz6ne" alt="Limited Pass"></div><div class="nft-body"><div class="nft-badge badge-limited-green">🟢 LIMITED</div><div class="nft-name">Limited Pass</div><div class="nft-desc">Free mint. Only 10,000 for early community members.</div><div class="nft-price price-green">FREE</div><div class="nft-supply green-supply">10,000 total</div><button class="nft-btn nft-btn-green" onclick="showTab('nft',document.querySelectorAll('.nav-link')[2])">Mint Free</button></div></div>
-          <div class="nft-card"><div class="nft-art"><img src="https://ipfs.io/ipfs/bafkreiezzeeol7ucbg7gm3mmfq6xi46wuwr26xmee2n6tssmhi3bq4zk5e" alt="Genesis"></div><div class="nft-body"><div class="nft-badge badge-free">✦ FREE</div><div class="nft-name">Genesis Pass</div><div class="nft-desc">Free unlimited mint. Your first step into Easy Swap.</div><div class="nft-price price-free">FREE</div><div class="nft-supply free-supply">∞ Unlimited</div><button class="nft-btn nft-btn-free" onclick="showTab('nft',document.querySelectorAll('.nav-link')[2])">Mint Free</button></div></div>
+          <div class="nft-card bnb-card">
+            <div class="nft-art"><img src="https://ipfs.io/ipfs/bafkreif43gg4azducogrhionfswumt24hvgl37z7ldv67p3acagxibajya" alt="Early Access"></div>
+            <div class="nft-body"><div class="nft-badge badge-limited">💎 BNB PASS</div><div class="nft-name">Early Access Pass</div><div class="nft-desc">Whitelist spot for ESP token presale.</div><div class="nft-price price-paid">~$0.90 in BNB</div><div class="nft-supply amber-supply">20,000 total</div><button class="nft-btn nft-btn-paid" onclick="showTab('nft',document.querySelectorAll('.nav-link')[2])">Get Access</button></div>
+          </div>
+          <div class="nft-card green-card">
+            <div class="nft-art"><img src="https://ipfs.io/ipfs/bafkreibfe7fu247y3mixrtkebldxlbmjb2pj22pglz7fucxhqy4lqkz6ne" alt="Limited Pass"></div>
+            <div class="nft-body"><div class="nft-badge badge-limited-green">🟢 LIMITED</div><div class="nft-name">Limited Pass</div><div class="nft-desc">Free mint. Only 10,000 for early community members.</div><div class="nft-price price-green">FREE</div><div class="nft-supply green-supply">10,000 total</div><button class="nft-btn nft-btn-green" onclick="showTab('nft',document.querySelectorAll('.nav-link')[2])">Mint Free</button></div>
+          </div>
+          <div class="nft-card">
+            <div class="nft-art"><img src="https://ipfs.io/ipfs/bafkreiezzeeol7ucbg7gm3mmfq6xi46wuwr26xmee2n6tssmhi3bq4zk5e" alt="Genesis"></div>
+            <div class="nft-body"><div class="nft-badge badge-free">✦ FREE</div><div class="nft-name">Genesis Pass</div><div class="nft-desc">Free unlimited mint. Your first step into Easy Swap.</div><div class="nft-price price-free">FREE</div><div class="nft-supply free-supply">∞ Unlimited</div><button class="nft-btn nft-btn-free" onclick="showTab('nft',document.querySelectorAll('.nav-link')[2])">Mint Free</button></div>
+          </div>
         </div>
       </div>
     </div>
@@ -367,15 +504,72 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
         <div class="gold-info"><div class="gold-badge">👑 GOLD PASS — ONLY 3,000</div><div class="gold-title">Easy Swap Gold Pass</div><div class="gold-desc">Lifetime free token creation on mainnet. Only 3,000 exist — once gone, forever gone.</div></div>
       </div>
       <div class="gold-bottom">
-        <div><div class="gold-price-block"><div class="gold-price" id="goldPriceNft">~$6.70</div><div class="gold-price-sub">in BNB · auto price</div></div><div class="gold-supply">Remaining: <span id="goldLeftNft">—</span> / 3,000</div></div>
-        <div style="text-align:right"><button class="gold-mint-btn" id="goldBtn" onclick="mintGold()">👑 Mint Gold Pass</button><div class="nft-count bnb-count" id="goldCnt" style="margin-top:6px"></div></div>
+        <div>
+          <div class="gold-price-block"><div class="gold-price" id="goldPriceNft">~$6.70</div><div class="gold-price-sub">in BNB · auto price</div></div>
+          <div class="gold-supply">Remaining: <span id="goldLeftNft">—</span> / 3,000</div>
+        </div>
+        <div style="text-align:right">
+          <button class="gold-mint-btn" id="goldBtn" onclick="mintGold()">👑 Mint Gold Pass</button>
+          <div class="nft-count bnb-count" id="goldCnt" style="margin-top:6px"></div>
+        </div>
       </div>
     </div>
     <div class="nft-grid-3">
-      <div class="nft-card bnb-card"><div class="nft-art"><img src="https://ipfs.io/ipfs/bafkreif43gg4azducogrhionfswumt24hvgl37z7ldv67p3acagxibajya" alt="Early Access"></div><div class="nft-body"><div class="nft-badge badge-limited">💎 BNB</div><div class="nft-name">Early Access Pass</div><div class="benefits-box"><div class="benefits-title">Benefits</div><div class="benefit-item"><span class="benefit-dot">◆</span><span class="benefit-text">ESP presale whitelist</span></div><div class="benefit-item"><span class="benefit-dot">◆</span><span class="benefit-text">Buy before listing — lowest price</span></div><div class="benefit-item"><span class="benefit-dot">◆</span><span class="benefit-text">Only 20,000 passes</span></div></div><div class="nft-price price-paid" id="paidPriceLabel">~$0.90 in BNB</div><div class="nft-supply amber-supply" id="remainingSupply">20,000 total</div><button class="nft-btn nft-btn-paid" id="paidBtn" onclick="mintPaid()">🔑 Get Access</button><div class="nft-count bnb-count" id="paidCnt"></div></div></div>
-      <div class="nft-card green-card"><div class="nft-art"><img src="https://ipfs.io/ipfs/bafkreibfe7fu247y3mixrtkebldxlbmjb2pj22pglz7fucxhqy4lqkz6ne" alt="Limited"></div><div class="nft-body"><div class="nft-badge badge-limited-green">🟢 LIMITED</div><div class="nft-name">Limited Pass</div><div class="nft-desc">Free mint. Only 10,000 for early community members.</div><div class="nft-price price-green">FREE</div><div class="nft-supply green-supply" id="limitedRemaining">10,000 total</div><button class="nft-btn nft-btn-green" id="limitedBtn" onclick="mintLimited()">Mint Limited</button><div class="nft-count green-count" id="limitedCnt"></div></div></div>
-      <div class="nft-card"><div class="nft-art"><img src="https://ipfs.io/ipfs/bafkreiezzeeol7ucbg7gm3mmfq6xi46wuwr26xmee2n6tssmhi3bq4zk5e" alt="Genesis"></div><div class="nft-body"><div class="nft-badge badge-free">✦ FREE</div><div class="nft-name">Genesis Pass</div><div class="nft-desc">Free Genesis Pass on LitVM.</div><div class="nft-price price-free">FREE</div><div class="nft-supply free-supply">∞ Unlimited</div><button class="nft-btn nft-btn-free" id="freeBtn" onclick="mintFree()">Mint Free</button><div class="nft-count" id="freeCnt"></div></div></div>
+      <div class="nft-card bnb-card">
+        <div class="nft-art"><img src="https://ipfs.io/ipfs/bafkreif43gg4azducogrhionfswumt24hvgl37z7ldv67p3acagxibajya" alt="Early Access"></div>
+        <div class="nft-body">
+          <div class="nft-badge badge-limited">💎 BNB</div><div class="nft-name">Early Access Pass</div>
+          <div class="benefits-box"><div class="benefits-title">Benefits</div><div class="benefit-item"><span class="benefit-dot">◆</span><span class="benefit-text">ESP presale whitelist</span></div><div class="benefit-item"><span class="benefit-dot">◆</span><span class="benefit-text">Buy before listing — lowest price</span></div><div class="benefit-item"><span class="benefit-dot">◆</span><span class="benefit-text">Only 20,000 passes</span></div></div>
+          <div class="nft-price price-paid" id="paidPriceLabel">~$0.90 in BNB</div><div class="nft-supply amber-supply" id="remainingSupply">20,000 total</div>
+          <button class="nft-btn nft-btn-paid" id="paidBtn" onclick="mintPaid()">🔑 Get Access</button>
+          <div class="nft-count bnb-count" id="paidCnt"></div>
+        </div>
+      </div>
+      <div class="nft-card green-card">
+        <div class="nft-art"><img src="https://ipfs.io/ipfs/bafkreibfe7fu247y3mixrtkebldxlbmjb2pj22pglz7fucxhqy4lqkz6ne" alt="Limited"></div>
+        <div class="nft-body">
+          <div class="nft-badge badge-limited-green">🟢 LIMITED</div><div class="nft-name">Limited Pass</div>
+          <div class="nft-desc">Free mint. Only 10,000 for early community members. Limited edition forever.</div>
+          <div class="nft-price price-green">FREE</div><div class="nft-supply green-supply" id="limitedRemaining">10,000 total</div>
+          <button class="nft-btn nft-btn-green" id="limitedBtn" onclick="mintLimited()">Mint Limited</button>
+          <div class="nft-count green-count" id="limitedCnt"></div>
+        </div>
+      </div>
+      <div class="nft-card">
+        <div class="nft-art"><img src="https://ipfs.io/ipfs/bafkreiezzeeol7ucbg7gm3mmfq6xi46wuwr26xmee2n6tssmhi3bq4zk5e" alt="Genesis"></div>
+        <div class="nft-body">
+          <div class="nft-badge badge-free">✦ FREE</div><div class="nft-name">Genesis Pass</div>
+          <div class="nft-desc">Free Genesis Pass on LitVM. Show your early support for Easy Swap!</div>
+          <div class="nft-price price-free">FREE</div><div class="nft-supply free-supply">∞ Unlimited</div>
+          <button class="nft-btn nft-btn-free" id="freeBtn" onclick="mintFree()">Mint Free</button>
+          <div class="nft-count" id="freeCnt"></div>
+        </div>
+      </div>
     </div>
+
+    <!-- ARCANIX TWITTER NFT -->
+    <div style="margin-top:16px;background:linear-gradient(135deg,#0a1020,#0d1828);border:1px solid #1d4a7c;border-radius:18px;padding:20px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#1d9bf0,transparent)"></div>
+      <div style="display:flex;gap:16px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
+        <img src="https://ipfs.io/ipfs/bafybeian6xxqvunvxhf7qmvzv75c7jlbsjizh2bjamyanxjquolhjx2uba" style="width:90px;height:90px;border-radius:12px;object-fit:cover;border:1px solid #1d4a7c;flex-shrink:0" alt="Arcanix">
+        <div>
+          <div style="display:inline-flex;align-items:center;gap:5px;background:#0a1828;border:1px solid #1d4a7c;border-radius:6px;padding:3px 10px;font-size:10px;font-weight:700;color:#1d9bf0;margin-bottom:7px">🐦 TWITTER EXCLUSIVE · FREE · UNLIMITED</div>
+          <div style="font-size:18px;font-weight:800;color:#7ab8f0;margin-bottom:5px">Arcanix — LEGENDARY</div>
+          <div style="font-size:12px;color:#3a6a9a;line-height:1.6">Follow @EasySwapLike1 on Twitter and mint your FREE Arcanix LEGENDARY NFT on LitVM!</div>
+        </div>
+      </div>
+      <div style="background:#071428;border:1px solid #1a3a5c;border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:12px;color:#4a90d9;line-height:2">
+        <b style="color:#7ab8f0">Step 1:</b> Follow <a href="https://x.com/EasySwapLike1" target="_blank" style="color:#1d9bf0">@EasySwapLike1</a> on Twitter &nbsp;·&nbsp;
+        <b style="color:#7ab8f0">Step 2:</b> Click "I Followed" &nbsp;·&nbsp;
+        <b style="color:#7ab8f0">Step 3:</b> Mint FREE 🎉
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <a href="https://x.com/EasySwapLike1" target="_blank" onclick="markFollowed()" style="display:inline-flex;align-items:center;gap:7px;background:#1d9bf0;color:white;border:none;padding:11px 20px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer">𝕏 Follow @EasySwapLike1</a>
+        <button id="arcanixBtn" onclick="mintArcanix()" style="background:linear-gradient(135deg,#1a4a8c,#0d2a5c);color:#7ab8f0;border:none;padding:11px 20px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer">🎨 I Followed — Mint Free</button>
+      </div>
+      <div id="arcanixCnt" style="font-size:10px;color:#1d4a7c;margin-top:8px"></div>
+    </div>
+
     <div class="status" id="nftSt"></div>
   </div>
 </div>
@@ -385,19 +579,32 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
   <div class="page">
     <div class="card">
       <div class="card-title">🪙 Create Your Token</div>
-      <div id="vipBadge" style="display:none" class="vip-badge"><div class="vip-badge-icon">👑</div><div><div class="vip-badge-title">Gold Pass Holder — VIP</div><div class="vip-badge-text">You create tokens for FREE on mainnet.</div></div></div>
-      <div class="fee-box"><span class="fee-label">Creation fee</span><span class="fee-value" id="feeDisplay">0.003 zkLTC</span></div>
-      <div class="form-group"><label class="form-label">Token Name *</label><input class="form-input" id="tkName" placeholder="e.g. My Awesome Token" maxlength="50"><div class="form-hint">Max 50 characters</div></div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Symbol *</label><input class="form-input" id="tkSymbol" placeholder="e.g. MAT" maxlength="10"></div>
-        <div class="form-group"><label class="form-label">Decimals</label><input class="form-input" id="tkDecimals" placeholder="18" type="number" min="0" max="18" value="18"></div>
+      <div id="vipBadge" style="display:none" class="vip-badge">
+        <div class="vip-badge-icon">👑</div>
+        <div><div class="vip-badge-title">Gold Pass Holder — VIP</div><div class="vip-badge-text">You create tokens for FREE on mainnet. Currently free for everyone on testnet.</div></div>
       </div>
-      <div class="form-group"><label class="form-label">Total Supply *</label><input class="form-input" id="tkSupply" placeholder="e.g. 1000000" type="number" min="1"></div>
-      <div class="form-group"><label class="form-label">Features</label><div class="options-row"><button class="option-btn" id="optMint" onclick="toggleOpt('optMint')">🔨 Mintable</button><button class="option-btn" id="optBurn" onclick="toggleOpt('optBurn')">🔥 Burnable</button><button class="option-btn" id="optPause" onclick="toggleOpt('optPause')">⏸ Pausable</button></div></div>
+      <div class="fee-box"><span class="fee-label">Creation fee</span><span class="fee-value" id="feeDisplay">0.003 zkLTC</span></div>
+      <div class="form-group"><label class="form-label">Token Name *</label><input class="form-input" id="tkName" placeholder="e.g. My Awesome Token" maxlength="50"><div class="form-hint">Max 50 characters — shown in wallets</div></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Symbol *</label><input class="form-input" id="tkSymbol" placeholder="e.g. MAT" maxlength="10"><div class="form-hint">Max 10 chars — shown on DEXes</div></div>
+        <div class="form-group"><label class="form-label">Decimals</label><input class="form-input" id="tkDecimals" placeholder="18" type="number" min="0" max="18" value="18"><div class="form-hint">18 is standard</div></div>
+      </div>
+      <div class="form-group"><label class="form-label">Total Supply *</label><input class="form-input" id="tkSupply" placeholder="e.g. 1000000" type="number" min="1"><div class="form-hint">Total tokens minted on creation</div></div>
+      <div class="form-group">
+        <label class="form-label">Features</label>
+        <div class="options-row">
+          <button class="option-btn" id="optMint" onclick="toggleOpt('optMint')">🔨 Mintable</button>
+          <button class="option-btn" id="optBurn" onclick="toggleOpt('optBurn')">🔥 Burnable</button>
+          <button class="option-btn" id="optPause" onclick="toggleOpt('optPause')">⏸ Pausable</button>
+        </div>
+      </div>
       <button class="main-btn btn-purple" id="createBtn" onclick="createToken()">🚀 Deploy Token — 0.003 zkLTC</button>
     </div>
     <div class="status" id="createSt"></div>
-    <div class="card" id="myTokensCard" style="display:none"><div class="card-title">My Tokens</div><div class="tokens-list" id="tokensList"></div></div>
+    <div class="card" id="myTokensCard" style="display:none">
+      <div class="card-title">My Tokens</div>
+      <div class="tokens-list" id="tokensList"></div>
+    </div>
   </div>
 </div>
 
@@ -424,53 +631,75 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
   </div>
 </div>
 
-<!-- BUY GATE -->
-<div id="panel-gate" class="panel">
+<!-- PROFILE -->
+<div id="panel-profile" class="panel">
+  <div class="page">
+    <div id="profileNotConn" class="card" style="text-align:center;padding:40px 24px">
+      <div style="font-size:48px;margin-bottom:12px">👤</div>
+      <div style="font-size:16px;font-weight:700;margin-bottom:8px">Connect your wallet</div>
+      <div style="font-size:13px;color:#3a6a9a;margin-bottom:20px">Connect MetaMask or Trust Wallet to view your profile</div>
+      <button class="main-btn btn-connect" style="max-width:220px;margin:0 auto" onclick="connectMM()">Connect Wallet</button>
+    </div>
+    <div id="profileContent" style="display:none">
+      <div class="profile-header">
+        <div style="font-size:14px;font-weight:700;margin-bottom:6px;color:var(--muted)">👤 Wallet Address</div>
+        <div class="profile-addr" id="profAddr">—</div>
+        <div class="profile-balances">
+          <div class="profile-bal"><div class="profile-bal-val" id="profZkbal">—</div><div class="profile-bal-lbl">zkLTC Balance</div></div>
+          <div class="profile-bal"><div class="profile-bal-val" id="profEspbal">—</div><div class="profile-bal-lbl">ESP Balance</div></div>
+        </div>
+        <div class="vip-row" id="profVipRow" style="display:none">
+          <div class="vip-row-icon">👑</div>
+          <div><div class="vip-row-title">Gold Pass Holder — VIP</div><div class="vip-row-sub">You have lifetime free token creation on mainnet</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📊 My Statistics</div>
+        <div class="stat-grid">
+          <div class="stat-box"><div class="stat-box-val" id="profMints">—</div><div class="stat-box-lbl">NFTs Minted</div></div>
+          <div class="stat-box"><div class="stat-box-val" id="profTokens">—</div><div class="stat-box-lbl">Tokens Created</div></div>
+          <div class="stat-box"><div class="stat-box-val" id="profLp">—</div><div class="stat-box-lbl">LP Balance</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🎨 My NFTs</div>
+        <div class="profile-nfts" id="profNfts">
+          <div style="font-size:12px;color:#3a6a9a;text-align:center;padding:20px;grid-column:span 2">Loading NFTs...</div>
+        </div>
+      </div>
+      <div class="card" id="profTokensCard" style="display:none">
+        <div class="card-title">🪙 My Tokens</div>
+        <div class="tokens-list" id="profTokensList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIVE FEED -->
+<div id="panel-feed" class="panel">
   <div class="page">
     <div class="card">
-      <div class="card-title">🟡 Buy GATE Token</div>
-      <div class="gate-info-box">
-        ✦ GATE is the social token of <span>OpenGate</span> platform<br>
-        ✦ Earn <span>0.1 GATE</span> per like received on your posts<br>
-        ✦ <span>Gold Pass = 2×</span> rewards · <span>Silver Pass = 1.3×</span> rewards<br>
-        ✦ Stake GATE for passive income · <span>0% staking fee</span>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <div class="card-title" style="margin:0">🟢 Live Activity</div>
+        <div style="width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite"></div>
       </div>
-      <div class="tok-box">
-        <div class="tok-label"><span>You pay</span><span class="tok-bal" id="gateBalNative">Balance: —</span></div>
-        <div class="tok-row">
-          <input class="tok-input" id="gatePayAmt" type="number" placeholder="0" min="0" oninput="onGateInput()">
-          <div class="tok-badge"><div class="tok-icon icon-zk">zk</div><span class="tok-name">zkLTC</span></div>
-        </div>
-        <div class="pct-row">
-          <button class="pct-btn" onclick="setGatePct(25)">25%</button>
-          <button class="pct-btn" onclick="setGatePct(50)">50%</button>
-          <button class="pct-btn" onclick="setGatePct(75)">75%</button>
-          <button class="pct-btn" onclick="setGatePct(100)">Max</button>
-        </div>
+      <div class="feed-list" id="feedList">
+        <div style="font-size:12px;color:#3a6a9a;text-align:center;padding:20px">Loading activity...</div>
       </div>
-      <div class="mid-row"><div class="flip-btn" onclick="flipGate()">⇅</div></div>
-      <div class="tok-box">
-        <div class="tok-label">You receive</div>
-        <div class="tok-row">
-          <div class="recv-val" id="gateRecvAmt"><div class="dash"></div></div>
-          <div class="tok-badge"><div class="tok-icon icon-gate">GT</div><span class="tok-name">GATE</span></div>
-        </div>
-      </div>
-      <div class="rate-line" id="gateRateLine" style="display:none">
-        <span>Exchange rate</span>
-        <span>1 zkLTC = <span id="gateRateVal">—</span> GATE</span>
-      </div>
-      <button class="main-btn btn-connect" id="gateSwapBtn" onclick="doGateSwap()">Connect Wallet</button>
     </div>
-    <div class="status" id="gateSt"></div>
+  </div>
+</div>
+
+<!-- LEADERBOARD -->
+<div id="panel-leaderboard" class="panel">
+  <div class="page">
     <div class="card">
-      <div class="card-title" style="font-size:14px;margin-bottom:12px;">GATE Pool Info</div>
-      <div class="pool-stats">
-        <div class="pool-stat"><div class="pool-val" id="gateResNative">—</div><div class="pool-lbl">zkLTC</div></div>
-        <div class="pool-stat"><div class="pool-val" id="gateResGate">—</div><div class="pool-lbl">GATE</div></div>
-        <div class="pool-stat"><div class="pool-val" id="gateMyLp">—</div><div class="pool-lbl">My LP</div></div>
+      <div class="card-title">🏆 Leaderboard</div>
+      <div class="lb-tabs">
+        <button class="lb-tab active" id="lbTabMints" onclick="switchLb('mints')">🎨 Top Minters</button>
+        <button class="lb-tab" id="lbTabTokens" onclick="switchLb('tokens')">🪙 Top Creators</button>
       </div>
-      <button class="main-btn btn-connect" style="margin-top:8px" onclick="loadGatePool()">↻ Refresh</button>
+      <div id="lbList"><div style="font-size:12px;color:#3a6a9a;text-align:center;padding:20px">Loading leaderboard...</div></div>
     </div>
   </div>
 </div>
@@ -484,211 +713,530 @@ const CFG = {
   PAID_NFT    : "0x95cedfc0C53D70833F7496b15930FAdcc4C731E3",
   GOLD_NFT    : "0x95D3e857793C1B1EbfA509d1DF3232448f619b27",
   TOKEN_FACTORY:"0xb69Df265Ac37A3E6AB2C940cFA395FE7fF0C0A60",
-  GATE_TOKEN  : "0xf383B2e7ad25D3f7f9cEcB68f4fe60049a3Ee8af",
-  GATE_SWAP   : "0xbeC5C89d76dbee96C1a2bd3EF9701694590BF7E8",
   LITVM_ID  : "0x1159",
-  LITVM_NET : {chainId:"0x1159",chainName:"LitVM LiteForge",nativeCurrency:{name:"zkLTC",symbol:"zkLTC",decimals:18},rpcUrls:["https://liteforge.rpc.caldera.xyz/http"],blockExplorerUrls:["https://liteforge.explorer.caldera.xyz"]},
+  LITVM_NET : {chainId:"0x1159",chainName:"LitVM LiteForge",nativeCurrency:{name:"zkLTC",symbol:"zkLTC",decimals:18},rpcUrls:["https://liteforge.rpc.caldera.xyz/http","https://liteforge-rpc.caldera.xyz/http"],blockExplorerUrls:["https://liteforge.explorer.caldera.xyz"]},
   BNB_ID : "0x38"
 };
+const ERC20_ABI=["function balanceOf(address) view returns(uint256)","function approve(address,uint256) returns(bool)","function allowance(address,address) view returns(uint256)"];
+const SWAP_ABI=["function swapNativeToESP() payable","function swapESPToNative(uint256)","function getAmountOut(bool,uint256) view returns(uint256)","function getReserves() view returns(uint256,uint256)","function addLiquidity(uint256) payable","function lpBalance(address) view returns(uint256)"];
+const FREE_NFT_ABI=["function mint()","function mintedCount(address) view returns(uint256)"];
+const LIMITED_NFT_ABI=["function mint()","function mintedCount(address) view returns(uint256)","function remainingSupply() view returns(uint256)"];
+const PAID_NFT_ABI=["function mint(uint256) payable","function getMintPrice() view returns(uint256)","function remainingSupply() view returns(uint256)","function mintedCount(address) view returns(uint256)"];
+const GOLD_NFT_ABI=["function mint() payable","function getMintPrice() view returns(uint256)","function remainingSupply() view returns(uint256)","function mintedCount(address) view returns(uint256)","function isVIP(address) view returns(bool)"];
+const FACTORY_ABI=["function createToken(string,string,uint8,uint256,bool,bool,bool) payable returns(address)","function creationFee() view returns(uint256)","function getTokensByCreator(address) view returns(address[])","function totalTokensCreated() view returns(uint256)"];
+const TOKEN_ABI=["function name() view returns(string)","function symbol() view returns(string)"];
 
-const ERC20_ABI = ["function balanceOf(address) view returns(uint256)","function approve(address,uint256) returns(bool)","function allowance(address,address) view returns(uint256)"];
-const SWAP_ABI = ["function swapNativeToESP() payable","function swapESPToNative(uint256)","function getAmountOut(bool,uint256) view returns(uint256)","function getReserves() view returns(uint256,uint256)","function addLiquidity(uint256) payable","function lpBalance(address) view returns(uint256)"];
-const FREE_NFT_ABI = ["function mint()","function mintedCount(address) view returns(uint256)"];
-const LIMITED_NFT_ABI = ["function mint()","function mintedCount(address) view returns(uint256)","function remainingSupply() view returns(uint256)"];
-const PAID_NFT_ABI = ["function mint(uint256) payable","function getMintPrice() view returns(uint256)","function remainingSupply() view returns(uint256)","function mintedCount(address) view returns(uint256)"];
-const GOLD_NFT_ABI = ["function mint() payable","function getMintPrice() view returns(uint256)","function remainingSupply() view returns(uint256)","function mintedCount(address) view returns(uint256)","function isVIP(address) view returns(bool)"];
-const FACTORY_ABI = ["function createToken(string,string,uint8,uint256,bool,bool,bool) payable returns(address)","function creationFee() view returns(uint256)","function getTokensByCreator(address) view returns(address[])","function totalTokensCreated() view returns(uint256)"];
-const TOKEN_ABI = ["function name() view returns(string)","function symbol() view returns(string)"];
-const GATE_SWAP_ABI = ["function getAmountOut(bool,uint256) view returns(uint256)","function swapNativeToGATE() payable","function swapGATEToNative(uint256)","function getReserves() view returns(uint256,uint256)","function lpBalance(address) view returns(uint256)"];
+const LITVM_RPCS=["https://liteforge.rpc.caldera.xyz/http","https://liteforge-rpc.caldera.xyz/http","https://liteforge.caldera.xyz/http"];
+async function getLitProvider(){for(const rpc of LITVM_RPCS){try{const p=new ethers.JsonRpcProvider(rpc);await Promise.race([p.getBlockNumber(),new Promise((_,r)=>setTimeout(()=>r(),3000))]);return p;}catch{}}return new ethers.JsonRpcProvider(LITVM_RPCS[0]);}
+let provider,signer,userAddr;
+let nativeBal=0n,swapDir=true,optMint=false,optBurn=false,optPause=false;
+let twitterFollowed=false;
 
-let provider, signer, userAddr;
-let nativeBal = 0n;
-let swapDir = true;
-let gateSwapDir = true;
-let optMint=false, optBurn=false, optPause=false;
+// ===== WALLET =====
+function showWErr(msg){
+  const el=document.getElementById('wErr');
+  el.innerHTML=msg;el.style.display='block';
+  document.getElementById('wmodalBg').style.display='flex';
+  clearTimeout(el._t);el._t=setTimeout(()=>{el.style.display='none';},6000);
+}
+function openWModal(){
+  if(userAddr){if(confirm('Disconnect wallet?'))disopenWModal();return;}
+  const el=document.getElementById('wmodalBg');
+  el.style.display='flex';
+}
+function closeWModal(){
+  document.getElementById('wmodalBg').style.display='none';
+}
+document.addEventListener('click',function(e){
+  const bg=document.getElementById('wmodalBg');
+  if(e.target===bg)closeWModal();
+});
 
-function showTab(name, el) {
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById('panel-'+name).classList.add('active');
-  document.querySelectorAll('.nav-link,.mob-btn').forEach(b=>b.classList.remove('active'));
-  if(el) el.classList.add('active');
-  if(name==='nft') refreshNft();
-  if(name==='liquidity') loadPool();
-  if(name==='create') loadCreatePage();
-  if(name==='home') loadHomeStats();
-  if(name==='gate') { loadGatePool(); updateGateBtn(); }
+function disconnectWallet(){
+  userAddr=null;provider=null;signer=null;
+  const btn=document.getElementById('walletBtn');
+  btn.textContent='Connect Wallet';btn.className='wallet-btn';
+  btn.onclick=openWModal;
+  document.getElementById('balNative').textContent='Balance: —';
+  updateSwapBtn();
+  document.getElementById('profileNotConn').style.display='block';
+  document.getElementById('profileContent').style.display='none';
 }
 
-function st(id,msg,type){const el=document.getElementById(id);el.textContent=msg;el.className='status show '+(type||'');}
-function fmt(wei){return parseFloat(ethers.formatEther(wei)).toFixed(4);}
-function short(a){return a.slice(0,6)+'...'+a.slice(-4);}
-
-async function connectWallet() {
-  if (!window.ethereum){alert("Install MetaMask: https://metamask.io");return;}
-  try {
-    provider = new ethers.BrowserProvider(window.ethereum);
-    const accs = await provider.send("eth_requestAccounts",[]);
-    userAddr = accs[0];
-    signer = await provider.getSigner();
-    window.ethereum.on('accountsChanged',a=>{userAddr=a[0];refreshWallet();});
+async function connectMM(){
+  closeWModal();
+  if(!window.ethereum){
+    showWErr('MetaMask not found. <a href="https://metamask.io/download/" target="_blank" style="color:#f87171;text-decoration:underline">Install →</a>');
+    return;
+  }
+  try{
+    provider=new ethers.BrowserProvider(window.ethereum);
+    const accs=await provider.send("eth_requestAccounts",[]);
+    userAddr=accs[0];signer=await provider.getSigner();
+    window.ethereum.on('accountsChanged',a=>{if(a.length){userAddr=a[0];refreshWallet();}else disconnectWallet();});
     window.ethereum.on('chainChanged',()=>location.reload());
     await refreshWallet();
-  } catch(e){alert("Error: "+e.message);}
+  }catch(e){
+    if(e.code===4001)return;
+  }
 }
 
-async function refreshWallet() {
-  if (!provider) return;
-  const net = await provider.getNetwork();
-  const chain = '0x'+net.chainId.toString(16);
-  nativeBal = await provider.getBalance(userAddr);
-  const btn = document.getElementById('walletBtn');
+async function connectTW(){
+  closeWModal();
+  const tw=window.trustwallet||window.ethereum;
+  if(!tw){
+    const isMobile=/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    if(isMobile){
+      window.location.href='https://link.trustwallet.com/open_url?coin_id=60&url='+encodeURIComponent(window.location.href);
+    }else{
+      showWErr('Trust Wallet not found. <a href="https://trustwallet.com/download" target="_blank" style="color:#f87171;text-decoration:underline">Install →</a>');
+    }
+    return;
+  }
+  try{
+    provider=new ethers.BrowserProvider(tw);
+    const accs=await provider.send("eth_requestAccounts",[]);
+    userAddr=accs[0];signer=await provider.getSigner();
+    tw.on&&tw.on('accountsChanged',a=>{if(a.length){userAddr=a[0];refreshWallet();}else disconnectWallet();});
+    tw.on&&tw.on('chainChanged',()=>location.reload());
+    await refreshWallet();
+  }catch(e){
+    if(e.code===4001)return;
+  }
+}
+
+async function refreshWallet(){
+  if(!provider)return;
+  const net=await provider.getNetwork();
+  const chain='0x'+net.chainId.toString(16);
+  nativeBal=await provider.getBalance(userAddr);
+  const btn=document.getElementById('walletBtn');
   let pill='';
-  if(chain===CFG.BNB_ID) pill='<span class="net-pill net-bnb">BNB</span>';
-  else if(chain.toLowerCase()===CFG.LITVM_ID.toLowerCase()) pill='<span class="net-pill net-litvm">LitVM</span>';
+  if(chain===CFG.BNB_ID)pill='<span class="net-pill net-bnb">BNB</span>';
+  else if(chain.toLowerCase()===CFG.LITVM_ID.toLowerCase())pill='<span class="net-pill net-litvm">LitVM</span>';
   else pill='<span class="net-pill net-other">'+net.chainId+'</span>';
-  btn.innerHTML=short(userAddr)+pill;
+  btn.innerHTML=userAddr.slice(0,6)+'...'+userAddr.slice(-4)+' '+pill;
   btn.classList.add('connected');
+  btn.onclick=()=>{if(confirm('Disconnect?'))disconnectWallet();};
   document.getElementById('balNative').textContent='Balance: '+fmt(nativeBal)+' zkLTC';
-  document.getElementById('gateBalNative').textContent='Balance: '+fmt(nativeBal)+' zkLTC';
   updateSwapBtn();
-  updateGateBtn();
   loadHomeStats();
 }
 
-async function switchNet(chainId, params) {
-  try {
-    await window.ethereum.request({method:'wallet_switchEthereumChain',params:[{chainId}]});
-  } catch(e) {
-    if(e.code===4902&&params) await window.ethereum.request({method:'wallet_addEthereumChain',params:[params]});
-    else throw e;
-  }
-  provider = new ethers.BrowserProvider(window.ethereum);
-  signer = await provider.getSigner();
+async function switchNet(chainId,params){
+  try{await window.ethereum.request({method:'wallet_switchEthereumChain',params:[{chainId}]});}
+  catch(e){if(e.code===4902&&params)await window.ethereum.request({method:'wallet_addEthereumChain',params:[params]});else throw e;}
+  provider=new ethers.BrowserProvider(window.ethereum);
+  signer=await provider.getSigner();
 }
 
-async function loadHomeStats() {
-  try {
-    const bnbProvider = new ethers.JsonRpcProvider("https://bsc-dataseed.binance.org");
-    const gold = new ethers.Contract(CFG.GOLD_NFT, GOLD_NFT_ABI, bnbProvider);
-    const rem = await gold.remainingSupply();
-    const price = await gold.getMintPrice();
-    document.getElementById('goldLeftHome').textContent = rem.toString();
-    document.getElementById('goldLeftNft').textContent = rem.toString();
-    document.getElementById('goldPriceHome').textContent = parseFloat(ethers.formatEther(price)).toFixed(5)+' BNB (~$6.70)';
-    document.getElementById('goldPriceNft').textContent = parseFloat(ethers.formatEther(price)).toFixed(5)+' BNB (~$6.70)';
-  } catch{}
-  try {
-    const litProvider = new ethers.JsonRpcProvider("https://liteforge.rpc.caldera.xyz/http");
-    const factory = new ethers.Contract(CFG.TOKEN_FACTORY, FACTORY_ABI, litProvider);
-    const total = await factory.totalTokensCreated();
-    document.getElementById('statTokens').textContent = total.toString();
-  } catch{}
+// ===== HOME STATS =====
+async function loadHomeStats(){
+  try{
+    const bnbProvider=new ethers.JsonRpcProvider("https://bsc-dataseed.binance.org");
+    const gold=new ethers.Contract(CFG.GOLD_NFT,GOLD_NFT_ABI,bnbProvider);
+    const rem=await gold.remainingSupply();
+    const price=await gold.getMintPrice();
+    document.getElementById('goldLeftHome').textContent=rem.toString();
+    document.getElementById('goldLeftNft').textContent=rem.toString();
+    document.getElementById('goldPriceNft').textContent=parseFloat(ethers.formatEther(price)).toFixed(5)+' BNB (~$6.70)';
+  }catch{}
+  try{
+    const litProvider=await getLitProvider();
+    const factory=new ethers.Contract(CFG.TOKEN_FACTORY,FACTORY_ABI,litProvider);
+    const total=await factory.totalTokensCreated();
+    document.getElementById('statTokens').textContent=total.toString();
+  }catch{}
 }
 
-// GATE POOL
-async function loadGatePool() {
-  try {
-    const p = new ethers.JsonRpcProvider('https://liteforge.rpc.caldera.xyz/http');
-    const swap = new ethers.Contract(CFG.GATE_SWAP, GATE_SWAP_ABI, p);
-    const [r0, r1] = await swap.getReserves();
-    document.getElementById('gateResNative').textContent = parseFloat(ethers.formatEther(r0)).toFixed(4)+' zkLTC';
-    document.getElementById('gateResGate').textContent = parseFloat(ethers.formatEther(r1)).toFixed(0)+' GATE';
-    if(userAddr){const lp=await swap.lpBalance(userAddr);document.getElementById('gateMyLp').textContent=parseFloat(ethers.formatEther(lp)).toFixed(4);}
-  } catch(e){}
+// ===== SWAP =====
+async function onInput(){
+  const v=parseFloat(document.getElementById('payAmt').value);
+  if(!v||v<=0){document.getElementById('recvAmt').innerHTML='<div class="dash"></div>';document.getElementById('rateLine').style.display='none';updateSwapBtn();return;}
+  if(!provider){updateSwapBtn();return;}
+  try{
+    const swap=new ethers.Contract(CFG.SWAP,SWAP_ABI,provider);
+    const out=await swap.getAmountOut(swapDir,ethers.parseEther(v.toString()));
+    document.getElementById('recvAmt').textContent=fmt(out);
+    document.getElementById('rateLine').style.display='flex';
+    document.getElementById('rateVal').textContent=(parseFloat(fmt(out))/v).toFixed(2);
+  }catch{document.getElementById('recvAmt').textContent='—';}
+  updateSwapBtn();
 }
-
-async function onGateInput() {
-  const v = parseFloat(document.getElementById('gatePayAmt').value);
-  if(!v||v<=0){document.getElementById('gateRecvAmt').innerHTML='<div class="dash"></div>';document.getElementById('gateRateLine').style.display='none';updateGateBtn();return;}
-  try {
-    const p = provider || new ethers.JsonRpcProvider('https://liteforge.rpc.caldera.xyz/http');
-    const swap = new ethers.Contract(CFG.GATE_SWAP, GATE_SWAP_ABI, p);
-    const out = await swap.getAmountOut(gateSwapDir, ethers.parseEther(v.toString()));
-    const outFmt = parseFloat(ethers.formatEther(out)).toFixed(2);
-    document.getElementById('gateRecvAmt').textContent = outFmt;
-    document.getElementById('gateRateLine').style.display = 'flex';
-    document.getElementById('gateRateVal').textContent = (parseFloat(outFmt)/v).toFixed(0);
-  } catch(e){document.getElementById('gateRecvAmt').textContent='—';}
-  updateGateBtn();
-}
-
-function setGatePct(p){document.getElementById('gatePayAmt').value=parseFloat(ethers.formatEther((nativeBal*BigInt(p))/100n)).toFixed(6);onGateInput();}
-
-function flipGate(){
-  gateSwapDir=!gateSwapDir;
-  document.getElementById('gatePayAmt').value='';
-  document.getElementById('gateRecvAmt').innerHTML='<div class="dash"></div>';
-  document.getElementById('gateRateLine').style.display='none';
-  updateGateBtn();
-}
-
-function updateGateBtn(){
-  const btn=document.getElementById('gateSwapBtn');
-  const v=parseFloat(document.getElementById('gatePayAmt').value);
+function setPct(p){document.getElementById('payAmt').value=parseFloat(ethers.formatEther((nativeBal*BigInt(p))/100n)).toFixed(6);onInput();}
+function flipDir(){swapDir=!swapDir;document.getElementById('payAmt').value='';document.getElementById('recvAmt').innerHTML='<div class="dash"></div>';document.getElementById('rateLine').style.display='none';updateSwapBtn();}
+function updateSwapBtn(){
+  const btn=document.getElementById('swapBtn');
+  const v=parseFloat(document.getElementById('payAmt').value);
   if(!userAddr){btn.textContent='Connect Wallet';btn.className='main-btn btn-connect';return;}
   if(!v||v<=0){btn.textContent='Enter amount';btn.className='main-btn btn-off';return;}
-  btn.textContent=gateSwapDir?'🟡 Buy GATE':'Sell GATE → zkLTC';
-  btn.className='main-btn btn-gold';
+  btn.textContent='Swap';btn.className='main-btn btn-go';
 }
-
-async function doGateSwap(){
-  if(!userAddr){connectWallet();return;}
-  const v=parseFloat(document.getElementById('gatePayAmt').value);
+async function doSwap(){
+  if(!userAddr){openWModal();return;}
+  const v=parseFloat(document.getElementById('payAmt').value);
   if(!v||v<=0)return;
   const net=await provider.getNetwork();
   if('0x'+net.chainId.toString(16)!==CFG.LITVM_ID.toLowerCase()){
-    try{st('gateSt','Switching to LitVM...','wait');await switchNet(CFG.LITVM_ID,CFG.LITVM_NET);}
-    catch{st('gateSt','Network error','err');return;}
+    try{st('swapSt','Switching to LitVM...','wait');await switchNet(CFG.LITVM_ID,CFG.LITVM_NET);}
+    catch{st('swapSt','Network error','err');return;}
   }
-  const btn=document.getElementById('gateSwapBtn');
+  const btn=document.getElementById('swapBtn');
   const amt=ethers.parseEther(v.toString());
   try{
-    const swap=new ethers.Contract(CFG.GATE_SWAP,GATE_SWAP_ABI,signer);
-    if(gateSwapDir){
-      st('gateSt','Confirm in MetaMask...','wait');
-      btn.className='main-btn btn-wait';btn.textContent='Pending...';
-      await (await swap.swapNativeToGATE({value:amt})).wait();
-      st('gateSt','✅ GATE bought successfully!','ok');
-    } else {
-      const gate=new ethers.Contract(CFG.GATE_TOKEN,ERC20_ABI,signer);
-      if(await gate.allowance(userAddr,CFG.GATE_SWAP)<amt){
-        st('gateSt','Approving GATE...','wait');
-        await (await gate.approve(CFG.GATE_SWAP,amt*2n)).wait();
+    const swap=new ethers.Contract(CFG.SWAP,SWAP_ABI,signer);
+    if(swapDir){
+      st('swapSt','Confirm in wallet...','wait');btn.className='main-btn btn-wait';btn.textContent='Pending...';
+      await(await swap.swapNativeToESP({value:amt})).wait();
+      st('swapSt','✅ Swap complete!','ok');addFeedItem('swap',userAddr,'Swapped '+v+' zkLTC → ESP');
+    }else{
+      const esp=new ethers.Contract(CFG.ESP_TOKEN,ERC20_ABI,signer);
+      if(await esp.allowance(userAddr,CFG.SWAP)<amt){
+        st('swapSt','Approving ESP...','wait');btn.className='main-btn btn-wait';btn.textContent='Approving...';
+        await(await esp.approve(CFG.SWAP,amt*2n)).wait();
       }
-      st('gateSt','Confirm swap...','wait');btn.className='main-btn btn-wait';btn.textContent='Pending...';
-      await (await swap.swapGATEToNative(amt)).wait();
-      st('gateSt','✅ Swapped GATE → zkLTC!','ok');
+      st('swapSt','Confirm swap...','wait');btn.className='main-btn btn-wait';btn.textContent='Pending...';
+      await(await swap.swapESPToNative(amt)).wait();
+      st('swapSt','✅ Done!','ok');addFeedItem('swap',userAddr,'Swapped '+v+' ESP → zkLTC');
     }
-    document.getElementById('gatePayAmt').value='';
-    onGateInput();refreshWallet();loadGatePool();
-  }catch(e){st('gateSt','❌ '+(e.reason||e.message||'Error').slice(0,60),'err');}
-  updateGateBtn();
+    document.getElementById('payAmt').value='';onInput();refreshWallet();
+  }catch(e){st('swapSt','❌ '+(e.reason||e.message||'Error'),'err');}
+  updateSwapBtn();
 }
 
-// ESP SWAP
-async function onInput(){const v=parseFloat(document.getElementById('payAmt').value);if(!v||v<=0){document.getElementById('recvAmt').innerHTML='<div class="dash"></div>';document.getElementById('rateLine').style.display='none';updateSwapBtn();return;}if(!provider){updateSwapBtn();return;}try{const swap=new ethers.Contract(CFG.SWAP,SWAP_ABI,provider);const out=await swap.getAmountOut(swapDir,ethers.parseEther(v.toString()));document.getElementById('recvAmt').textContent=fmt(out);document.getElementById('rateLine').style.display='flex';document.getElementById('rateVal').textContent=(parseFloat(fmt(out))/v).toFixed(2);}catch{document.getElementById('recvAmt').textContent='—';}updateSwapBtn();}
-function setPct(p){document.getElementById('payAmt').value=parseFloat(ethers.formatEther((nativeBal*BigInt(p))/100n)).toFixed(6);onInput();}
-function flipDir(){swapDir=!swapDir;document.getElementById('payAmt').value='';document.getElementById('recvAmt').innerHTML='<div class="dash"></div>';document.getElementById('rateLine').style.display='none';updateSwapBtn();}
-function updateSwapBtn(){const btn=document.getElementById('swapBtn');const v=parseFloat(document.getElementById('payAmt').value);if(!userAddr){btn.textContent='Connect Wallet';btn.className='main-btn btn-connect';return;}if(!v||v<=0){btn.textContent='Enter amount';btn.className='main-btn btn-off';return;}btn.textContent='Swap';btn.className='main-btn btn-go';}
-async function doSwap(){if(!userAddr){connectWallet();return;}const v=parseFloat(document.getElementById('payAmt').value);if(!v||v<=0)return;const net=await provider.getNetwork();if('0x'+net.chainId.toString(16)!==CFG.LITVM_ID.toLowerCase()){try{st('swapSt','Switching to LitVM...','wait');await switchNet(CFG.LITVM_ID,CFG.LITVM_NET);}catch{st('swapSt','Network error','err');return;}}const btn=document.getElementById('swapBtn');const amt=ethers.parseEther(v.toString());try{const swap=new ethers.Contract(CFG.SWAP,SWAP_ABI,signer);if(swapDir){st('swapSt','Confirm in MetaMask...','wait');btn.className='main-btn btn-wait';btn.textContent='Pending...';await (await swap.swapNativeToESP({value:amt})).wait();st('swapSt','✅ Swap complete!','ok');}else{const esp=new ethers.Contract(CFG.ESP_TOKEN,ERC20_ABI,signer);if(await esp.allowance(userAddr,CFG.SWAP)<amt){st('swapSt','Approving ESP...','wait');btn.className='main-btn btn-wait';btn.textContent='Approving...';await (await esp.approve(CFG.SWAP,amt*2n)).wait();}st('swapSt','Confirm swap...','wait');btn.className='main-btn btn-wait';btn.textContent='Pending...';await (await swap.swapESPToNative(amt)).wait();st('swapSt','✅ Done!','ok');}document.getElementById('payAmt').value='';onInput();refreshWallet();}catch(e){st('swapSt','❌ '+(e.reason||e.message||'Error'),'err');}updateSwapBtn();}
+// ===== NFT =====
+function markFollowed(){twitterFollowed=true;}
+async function mintArcanix(){
+  if(!userAddr){openWModal();return;}
+  if(!twitterFollowed){st('nftSt','Please follow @EasySwapLike1 first, then click "I Followed — Mint Free"','err');return;}
+  const net=await provider.getNetwork();
+  if('0x'+net.chainId.toString(16)!==CFG.LITVM_ID.toLowerCase()){
+    try{st('nftSt','Switching to LitVM...','wait');await switchNet(CFG.LITVM_ID,CFG.LITVM_NET);}
+    catch{st('nftSt','Network error','err');return;}
+  }
+  const btn=document.getElementById('arcanixBtn');
+  try{
+    btn.disabled=true;st('nftSt','Confirm in wallet...','wait');
+    const tx=await(new ethers.Contract(CFG.TEST_NFT,FREE_NFT_ABI,signer)).mint();
+    await tx.wait();
+    st('nftSt','🎉 Arcanix LEGENDARY minted!','ok');
+    addFeedItem('mint',userAddr,'Minted Arcanix LEGENDARY NFT');
+    refreshNft();
+  }catch(e){st('nftSt','❌ '+(e.reason||e.message),'err');}
+  btn.disabled=false;
+}
 
-// NFT
-async function refreshNft(){if(!userAddr)return;const net=await provider.getNetwork();const chain='0x'+net.chainId.toString(16);const warn=document.getElementById('nftWarn');warn.style.display='none';if(chain.toLowerCase()===CFG.LITVM_ID.toLowerCase()){try{const nft=new ethers.Contract(CFG.TEST_NFT,FREE_NFT_ABI,provider);const cnt=await nft.mintedCount(userAddr);document.getElementById('freeCnt').textContent='You minted: '+cnt;}catch{}try{const nft=new ethers.Contract(CFG.LIMITED_NFT,LIMITED_NFT_ABI,provider);const cnt=await nft.mintedCount(userAddr);const rem=await nft.remainingSupply();document.getElementById('limitedCnt').textContent='You minted: '+cnt;document.getElementById('limitedRemaining').textContent=rem+' / 10,000 remaining';}catch{}}if(chain===CFG.BNB_ID){try{const nft=new ethers.Contract(CFG.PAID_NFT,PAID_NFT_ABI,provider);const cnt=await nft.mintedCount(userAddr);const price=await nft.getMintPrice();const rem=await nft.remainingSupply();document.getElementById('paidCnt').textContent='You minted: '+cnt;document.getElementById('paidPriceLabel').textContent=parseFloat(ethers.formatEther(price)).toFixed(6)+' BNB (~$0.90)';document.getElementById('remainingSupply').textContent=rem+' / 20,000 remaining';}catch{}try{const gold=new ethers.Contract(CFG.GOLD_NFT,GOLD_NFT_ABI,provider);const cnt=await gold.mintedCount(userAddr);const price=await gold.getMintPrice();const rem=await gold.remainingSupply();document.getElementById('goldCnt').textContent='You minted: '+cnt;document.getElementById('goldPriceNft').textContent=parseFloat(ethers.formatEther(price)).toFixed(5)+' BNB (~$6.70)';document.getElementById('goldLeftNft').textContent=rem.toString();}catch{}}if(chain.toLowerCase()!==CFG.LITVM_ID.toLowerCase()&&chain!==CFG.BNB_ID){warn.style.display='block';warn.textContent='⚠️ Switch to LitVM for free NFTs or BNB Chain for Gold Pass & Early Access Pass';}}
-async function mintFree(){if(!userAddr){connectWallet();return;}const net=await provider.getNetwork();if('0x'+net.chainId.toString(16)!==CFG.LITVM_ID.toLowerCase()){try{st('nftSt','Switching to LitVM...','wait');await switchNet(CFG.LITVM_ID,CFG.LITVM_NET);}catch{st('nftSt','Network error','err');return;}}const btn=document.getElementById('freeBtn');try{btn.disabled=true;st('nftSt','Confirm in MetaMask...','wait');const tx=await (new ethers.Contract(CFG.TEST_NFT,FREE_NFT_ABI,signer)).mint();await tx.wait();st('nftSt','✅ Genesis Pass minted!','ok');refreshNft();}catch(e){st('nftSt','❌ '+(e.reason||e.message),'err');}btn.disabled=false;}
-async function mintLimited(){if(!userAddr){connectWallet();return;}const net=await provider.getNetwork();if('0x'+net.chainId.toString(16)!==CFG.LITVM_ID.toLowerCase()){try{st('nftSt','Switching to LitVM...','wait');await switchNet(CFG.LITVM_ID,CFG.LITVM_NET);}catch{st('nftSt','Network error','err');return;}}const btn=document.getElementById('limitedBtn');try{btn.disabled=true;st('nftSt','Confirm in MetaMask...','wait');const tx=await (new ethers.Contract(CFG.LIMITED_NFT,LIMITED_NFT_ABI,signer)).mint();await tx.wait();st('nftSt','✅ Limited Pass minted!','ok');refreshNft();}catch(e){st('nftSt','❌ '+(e.reason||e.message),'err');}btn.disabled=false;}
-async function mintPaid(){if(!userAddr){connectWallet();return;}const net=await provider.getNetwork();if('0x'+net.chainId.toString(16)!==CFG.BNB_ID){try{st('nftSt','Switching to BNB...','wait');await switchNet(CFG.BNB_ID);}catch{st('nftSt','Network error','err');return;}}const btn=document.getElementById('paidBtn');try{btn.disabled=true;const nft=new ethers.Contract(CFG.PAID_NFT,PAID_NFT_ABI,signer);const price=await nft.getMintPrice();st('nftSt','Confirm in MetaMask ('+parseFloat(ethers.formatEther(price)).toFixed(6)+' BNB)...','wait');await (await nft.mint(1,{value:price})).wait();st('nftSt','✅ Early Access Pass minted!','ok');refreshNft();}catch(e){st('nftSt','❌ '+(e.reason||e.message),'err');}btn.disabled=false;}
-async function mintGold(){if(!userAddr){connectWallet();return;}const net=await provider.getNetwork();if('0x'+net.chainId.toString(16)!==CFG.BNB_ID){try{st('nftSt','Switching to BNB...','wait');await switchNet(CFG.BNB_ID);}catch{st('nftSt','Network error','err');return;}}const btn=document.getElementById('goldBtn');try{btn.disabled=true;const nft=new ethers.Contract(CFG.GOLD_NFT,GOLD_NFT_ABI,signer);const price=await nft.getMintPrice();st('nftSt','Confirm in MetaMask ('+parseFloat(ethers.formatEther(price)).toFixed(5)+' BNB)...','wait');await (await nft.mint({value:price})).wait();st('nftSt','👑 Gold Pass minted! Welcome to VIP!','ok');refreshNft();loadHomeStats();}catch(e){st('nftSt','❌ '+(e.reason||e.message),'err');}btn.disabled=false;}
+async function refreshNft(){
+  if(!userAddr)return;
+  const net=await provider.getNetwork();
+  const chain='0x'+net.chainId.toString(16);
+  const warn=document.getElementById('nftWarn');warn.style.display='none';
+  if(chain.toLowerCase()===CFG.LITVM_ID.toLowerCase()){
+    try{const nft=new ethers.Contract(CFG.TEST_NFT,FREE_NFT_ABI,provider);const cnt=await nft.mintedCount(userAddr);document.getElementById('freeCnt').textContent='You minted: '+cnt;document.getElementById('arcanixCnt').textContent='You minted: '+cnt+' Arcanix NFT(s)';}catch{}
+    try{const nft=new ethers.Contract(CFG.LIMITED_NFT,LIMITED_NFT_ABI,provider);const cnt=await nft.mintedCount(userAddr);const rem=await nft.remainingSupply();document.getElementById('limitedCnt').textContent='You minted: '+cnt;document.getElementById('limitedRemaining').textContent=rem+' / 10,000 remaining';}catch{}
+  }
+  if(chain===CFG.BNB_ID){
+    try{const nft=new ethers.Contract(CFG.PAID_NFT,PAID_NFT_ABI,provider);const cnt=await nft.mintedCount(userAddr);const price=await nft.getMintPrice();const rem=await nft.remainingSupply();document.getElementById('paidCnt').textContent='You minted: '+cnt;document.getElementById('paidPriceLabel').textContent=parseFloat(ethers.formatEther(price)).toFixed(6)+' BNB (~$0.90)';document.getElementById('remainingSupply').textContent=rem+' / 20,000 remaining';}catch{}
+    try{const gold=new ethers.Contract(CFG.GOLD_NFT,GOLD_NFT_ABI,provider);const cnt=await gold.mintedCount(userAddr);const price=await gold.getMintPrice();const rem=await gold.remainingSupply();document.getElementById('goldCnt').textContent='You minted: '+cnt;document.getElementById('goldPriceNft').textContent=parseFloat(ethers.formatEther(price)).toFixed(5)+' BNB (~$6.70)';document.getElementById('goldLeftNft').textContent=rem.toString();}catch{}
+  }
+  if(chain.toLowerCase()!==CFG.LITVM_ID.toLowerCase()&&chain!==CFG.BNB_ID){warn.style.display='block';warn.textContent='⚠️ Switch to LitVM for free NFTs or BNB Chain for Gold Pass & Early Access Pass';}
+}
 
-// TOKEN FACTORY
+async function mintFree(){
+  if(!userAddr){openWModal();return;}
+  const net=await provider.getNetwork();
+  if('0x'+net.chainId.toString(16)!==CFG.LITVM_ID.toLowerCase()){try{st('nftSt','Switching to LitVM...','wait');await switchNet(CFG.LITVM_ID,CFG.LITVM_NET);}catch{st('nftSt','Network error','err');return;}}
+  const btn=document.getElementById('freeBtn');
+  try{btn.disabled=true;st('nftSt','Confirm in wallet...','wait');const tx=await(new ethers.Contract(CFG.TEST_NFT,FREE_NFT_ABI,signer)).mint();await tx.wait();st('nftSt','✅ Genesis Pass minted!','ok');addFeedItem('mint',userAddr,'Minted Genesis Pass');refreshNft();}
+  catch(e){st('nftSt','❌ '+(e.reason||e.message),'err');}
+  btn.disabled=false;
+}
+async function mintLimited(){
+  if(!userAddr){openWModal();return;}
+  const net=await provider.getNetwork();
+  if('0x'+net.chainId.toString(16)!==CFG.LITVM_ID.toLowerCase()){try{st('nftSt','Switching to LitVM...','wait');await switchNet(CFG.LITVM_ID,CFG.LITVM_NET);}catch{st('nftSt','Network error','err');return;}}
+  const btn=document.getElementById('limitedBtn');
+  try{btn.disabled=true;st('nftSt','Confirm in wallet...','wait');const tx=await(new ethers.Contract(CFG.LIMITED_NFT,LIMITED_NFT_ABI,signer)).mint();await tx.wait();st('nftSt','✅ Limited Pass minted!','ok');addFeedItem('mint',userAddr,'Minted Limited Pass');refreshNft();}
+  catch(e){st('nftSt','❌ '+(e.reason||e.message),'err');}
+  btn.disabled=false;
+}
+async function mintPaid(){
+  if(!userAddr){openWModal();return;}
+  const net=await provider.getNetwork();
+  if('0x'+net.chainId.toString(16)!==CFG.BNB_ID){try{st('nftSt','Switching to BNB...','wait');await switchNet(CFG.BNB_ID);}catch{st('nftSt','Network error','err');return;}}
+  const btn=document.getElementById('paidBtn');
+  try{btn.disabled=true;const nft=new ethers.Contract(CFG.PAID_NFT,PAID_NFT_ABI,signer);const price=await nft.getMintPrice();st('nftSt','Confirm in wallet ('+parseFloat(ethers.formatEther(price)).toFixed(6)+' BNB)...','wait');await(await nft.mint(1,{value:price})).wait();st('nftSt','✅ Early Access Pass minted!','ok');addFeedItem('mint',userAddr,'Minted Early Access Pass');refreshNft();}
+  catch(e){st('nftSt','❌ '+(e.reason||e.message),'err');}
+  btn.disabled=false;
+}
+async function mintGold(){
+  if(!userAddr){openWModal();return;}
+  const net=await provider.getNetwork();
+  if('0x'+net.chainId.toString(16)!==CFG.BNB_ID){try{st('nftSt','Switching to BNB...','wait');await switchNet(CFG.BNB_ID);}catch{st('nftSt','Network error','err');return;}}
+  const btn=document.getElementById('goldBtn');
+  try{btn.disabled=true;const nft=new ethers.Contract(CFG.GOLD_NFT,GOLD_NFT_ABI,signer);const price=await nft.getMintPrice();st('nftSt','Confirm in wallet ('+parseFloat(ethers.formatEther(price)).toFixed(5)+' BNB)...','wait');await(await nft.mint({value:price})).wait();st('nftSt','👑 Gold Pass minted! Welcome to VIP!','ok');addFeedItem('mint',userAddr,'Minted 👑 Gold Pass');refreshNft();loadHomeStats();}
+  catch(e){st('nftSt','❌ '+(e.reason||e.message),'err');}
+  btn.disabled=false;
+}
+
+// ===== TOKEN FACTORY =====
 function toggleOpt(id){const btn=document.getElementById(id);if(id==='optMint'){optMint=!optMint;btn.classList.toggle('active',optMint);}else if(id==='optBurn'){optBurn=!optBurn;btn.classList.toggle('active',optBurn);}else if(id==='optPause'){optPause=!optPause;btn.classList.toggle('active',optPause);}}
-async function loadCreatePage(){if(!userAddr)return;try{const net=await provider.getNetwork();const chain='0x'+net.chainId.toString(16);if(chain===CFG.BNB_ID){const gold=new ethers.Contract(CFG.GOLD_NFT,GOLD_NFT_ABI,provider);const vip=await gold.isVIP(userAddr);document.getElementById('vipBadge').style.display=vip?'flex':'none';}}catch{}try{const litProvider=new ethers.JsonRpcProvider("https://liteforge.rpc.caldera.xyz/http");const factory=new ethers.Contract(CFG.TOKEN_FACTORY,FACTORY_ABI,litProvider);const tokens=await factory.getTokensByCreator(userAddr);if(tokens.length>0){document.getElementById('myTokensCard').style.display='block';const list=document.getElementById('tokensList');list.innerHTML='';for(const addr of tokens.slice(-5).reverse()){try{const t=new ethers.Contract(addr,TOKEN_ABI,litProvider);const n=await t.name();const s=await t.symbol();list.innerHTML+=`<div class="token-item"><div class="token-item-left"><div class="token-item-icon">${s.slice(0,2)}</div><div><div class="token-item-name">${n} (${s})</div><div class="token-item-addr">${addr.slice(0,16)}...</div></div></div><button class="token-item-copy" onclick="navigator.clipboard.writeText('${addr}')">Copy</button></div>`;}catch{}}}}catch{}}
-async function createToken(){if(!userAddr){connectWallet();return;}const name=document.getElementById('tkName').value.trim();const symbol=document.getElementById('tkSymbol').value.trim();const decimals=parseInt(document.getElementById('tkDecimals').value)||18;const supply=parseInt(document.getElementById('tkSupply').value);if(!name||!symbol||!supply){st('createSt','Fill all required fields','err');return;}const net=await provider.getNetwork();if('0x'+net.chainId.toString(16)!==CFG.LITVM_ID.toLowerCase()){try{st('createSt','Switching to LitVM...','wait');await switchNet(CFG.LITVM_ID,CFG.LITVM_NET);}catch{st('createSt','Network error','err');return;}}const btn=document.getElementById('createBtn');try{btn.disabled=true;const factory=new ethers.Contract(CFG.TOKEN_FACTORY,FACTORY_ABI,signer);const fee=await factory.creationFee();st('createSt','Confirm in MetaMask ('+fmt(fee)+' zkLTC)...','wait');btn.textContent='Deploying...';const tx=await factory.createToken(name,symbol,decimals,supply,optMint,optBurn,optPause,{value:fee});st('createSt','Deploying token...','wait');await tx.wait();st('createSt','✅ Token '+symbol+' deployed!','ok');document.getElementById('tkName').value='';document.getElementById('tkSymbol').value='';document.getElementById('tkSupply').value='';loadCreatePage();loadHomeStats();}catch(e){st('createSt','❌ '+(e.reason||e.message||'Error'),'err');}btn.disabled=false;btn.textContent='🚀 Deploy Token — 0.003 zkLTC';}
+async function loadCreatePage(){
+  if(!userAddr)return;
+  try{const net=await provider.getNetwork();const chain='0x'+net.chainId.toString(16);if(chain===CFG.BNB_ID){const gold=new ethers.Contract(CFG.GOLD_NFT,GOLD_NFT_ABI,provider);const vip=await gold.isVIP(userAddr);document.getElementById('vipBadge').style.display=vip?'flex':'none';}}catch{}
+  try{
+    const litProvider=await getLitProvider();
+    const factory=new ethers.Contract(CFG.TOKEN_FACTORY,FACTORY_ABI,litProvider);
+    const tokens=await factory.getTokensByCreator(userAddr);
+    if(tokens.length>0){
+      document.getElementById('myTokensCard').style.display='block';
+      const list=document.getElementById('tokensList');list.innerHTML='';
+      for(const addr of tokens.slice(-5).reverse()){try{const t=new ethers.Contract(addr,TOKEN_ABI,litProvider);const n=await t.name();const s=await t.symbol();list.innerHTML+=`<div class="token-item"><div class="token-item-left"><div class="token-item-icon">${s.slice(0,2)}</div><div><div class="token-item-name">${n} (${s})</div><div class="token-item-addr">${addr.slice(0,16)}...</div></div></div><button class="token-item-copy" onclick="navigator.clipboard.writeText('${addr}')">Copy</button></div>`;}catch{}}
+    }
+  }catch{}
+}
+async function createToken(){
+  if(!userAddr){openWModal();return;}
+  const name=document.getElementById('tkName').value.trim();
+  const symbol=document.getElementById('tkSymbol').value.trim();
+  const decimals=parseInt(document.getElementById('tkDecimals').value)||18;
+  const supply=parseInt(document.getElementById('tkSupply').value);
+  if(!name||!symbol||!supply){st('createSt','Fill all required fields','err');return;}
+  const net=await provider.getNetwork();
+  if('0x'+net.chainId.toString(16)!==CFG.LITVM_ID.toLowerCase()){try{st('createSt','Switching to LitVM...','wait');await switchNet(CFG.LITVM_ID,CFG.LITVM_NET);}catch{st('createSt','Network error','err');return;}}
+  const btn=document.getElementById('createBtn');
+  try{
+    btn.disabled=true;
+    const factory=new ethers.Contract(CFG.TOKEN_FACTORY,FACTORY_ABI,signer);
+    const fee=await factory.creationFee();
+    st('createSt','Confirm in wallet ('+fmt(fee)+' zkLTC)...','wait');btn.textContent='Deploying...';
+    const tx=await factory.createToken(name,symbol,decimals,supply,optMint,optBurn,optPause,{value:fee});
+    st('createSt','Deploying token...','wait');
+    const receipt=await tx.wait();
+    st('createSt','✅ Token '+symbol+' deployed! Check My Tokens below.','ok');
+    addFeedItem('token',userAddr,'Deployed token '+symbol);
+    document.getElementById('tkName').value='';document.getElementById('tkSymbol').value='';document.getElementById('tkSupply').value='';
+    loadCreatePage();loadHomeStats();
+  }catch(e){st('createSt','❌ '+(e.reason||e.message||'Error'),'err');}
+  btn.disabled=false;btn.textContent='🚀 Deploy Token — 0.003 zkLTC';
+}
 
-// POOL
-async function loadPool(){if(!provider)return;try{const swap=new ethers.Contract(CFG.SWAP,SWAP_ABI,provider);const [r0,r1]=await swap.getReserves();document.getElementById('resNative').textContent=fmt(r0)+' zkLTC';document.getElementById('resESP').textContent=fmt(r1)+' ESP';if(userAddr){const lp=await swap.lpBalance(userAddr);document.getElementById('myLP').textContent=fmt(lp);}}catch{document.getElementById('resNative').textContent='Error';}}
-async function addLiq(){if(!userAddr){connectWallet();return;}const n=document.getElementById('liqNative').value;const e=document.getElementById('liqESP').value;if(!n||!e){st('liqSt','Enter both values','err');return;}try{const esp=new ethers.Contract(CFG.ESP_TOKEN,ERC20_ABI,signer);const swap=new ethers.Contract(CFG.SWAP,SWAP_ABI,signer);st('liqSt','Approve ESP...','wait');await (await esp.approve(CFG.SWAP,ethers.parseEther(e))).wait();st('liqSt','Adding liquidity...','wait');await (await swap.addLiquidity(ethers.parseEther(e),{value:ethers.parseEther(n)})).wait();st('liqSt','✅ Liquidity added!','ok');loadPool();}catch(e){st('liqSt','❌ '+(e.reason||e.message),'err');}}
+// ===== POOL =====
+async function loadPool(){
+  if(!provider)return;
+  try{const swap=new ethers.Contract(CFG.SWAP,SWAP_ABI,provider);const [r0,r1]=await swap.getReserves();document.getElementById('resNative').textContent=fmt(r0)+' zkLTC';document.getElementById('resESP').textContent=fmt(r1)+' ESP';if(userAddr){const lp=await swap.lpBalance(userAddr);document.getElementById('myLP').textContent=fmt(lp);}}
+  catch{document.getElementById('resNative').textContent='Error';}
+}
+async function addLiq(){
+  if(!userAddr){openWModal();return;}
+  const n=document.getElementById('liqNative').value,e=document.getElementById('liqESP').value;
+  if(!n||!e){st('liqSt','Enter both values','err');return;}
+  try{
+    const esp=new ethers.Contract(CFG.ESP_TOKEN,ERC20_ABI,signer);
+    const swap=new ethers.Contract(CFG.SWAP,SWAP_ABI,signer);
+    st('liqSt','Approve ESP...','wait');
+    await(await esp.approve(CFG.SWAP,ethers.parseEther(e))).wait();
+    st('liqSt','Adding liquidity...','wait');
+    await(await swap.addLiquidity(ethers.parseEther(e),{value:ethers.parseEther(n)})).wait();
+    st('liqSt','✅ Liquidity added!','ok');
+    addFeedItem('liq',userAddr,'Added liquidity '+n+' zkLTC + '+e+' ESP');
+    loadPool();
+  }catch(e){st('liqSt','❌ '+(e.reason||e.message),'err');}
+}
 
-window.addEventListener('load', () => { loadHomeStats(); loadGatePool(); });
+// ===== PROFILE =====
+async function loadProfile(){
+  if(!userAddr){
+    document.getElementById('profileNotConn').style.display='block';
+    document.getElementById('profileContent').style.display='none';
+    return;
+  }
+  document.getElementById('profileNotConn').style.display='none';
+  document.getElementById('profileContent').style.display='block';
+  document.getElementById('profAddr').textContent=userAddr;
+
+  // Balances on LitVM
+  try{
+    const litProvider=await getLitProvider();
+    const zkBal=await litProvider.getBalance(userAddr);
+    document.getElementById('profZkbal').textContent=fmt(zkBal)+' zkLTC';
+    const esp=new ethers.Contract(CFG.ESP_TOKEN,ERC20_ABI,litProvider);
+    const espBal=await esp.balanceOf(userAddr);
+    document.getElementById('profEspbal').textContent=fmt(espBal)+' ESP';
+  }catch{}
+
+  // VIP check
+  try{
+    const bnbProvider=new ethers.JsonRpcProvider("https://bsc-dataseed.binance.org");
+    const gold=new ethers.Contract(CFG.GOLD_NFT,GOLD_NFT_ABI,bnbProvider);
+    const vip=await gold.isVIP(userAddr);
+    document.getElementById('profVipRow').style.display=vip?'flex':'none';
+  }catch{}
+
+  // NFT counts
+  let totalMints=0;
+  const nftData=[];
+  try{
+    const litProvider=await getLitProvider();
+    const genesis=new ethers.Contract(CFG.TEST_NFT,FREE_NFT_ABI,litProvider);
+    const gc=parseInt(await genesis.mintedCount(userAddr));
+    if(gc>0){nftData.push({name:'Genesis Pass',cnt:gc,img:'https://ipfs.io/ipfs/bafkreiezzeeol7ucbg7gm3mmfq6xi46wuwr26xmee2n6tssmhi3bq4zk5e'});totalMints+=gc;}
+    const limited=new ethers.Contract(CFG.LIMITED_NFT,LIMITED_NFT_ABI,litProvider);
+    const lc=parseInt(await limited.mintedCount(userAddr));
+    if(lc>0){nftData.push({name:'Limited Pass',cnt:lc,img:'https://ipfs.io/ipfs/bafkreibfe7fu247y3mixrtkebldxlbmjb2pj22pglz7fucxhqy4lqkz6ne'});totalMints+=lc;}
+  }catch{}
+  try{
+    const bnbProvider=new ethers.JsonRpcProvider("https://bsc-dataseed.binance.org");
+    const paid=new ethers.Contract(CFG.PAID_NFT,PAID_NFT_ABI,bnbProvider);
+    const pc=parseInt(await paid.mintedCount(userAddr));
+    if(pc>0){nftData.push({name:'Early Access Pass',cnt:pc,img:'https://ipfs.io/ipfs/bafkreif43gg4azducogrhionfswumt24hvgl37z7ldv67p3acagxibajya'});totalMints+=pc;}
+    const gold=new ethers.Contract(CFG.GOLD_NFT,GOLD_NFT_ABI,bnbProvider);
+    const goc=parseInt(await gold.mintedCount(userAddr));
+    if(goc>0){nftData.push({name:'Gold Pass 👑',cnt:goc,img:'https://ipfs.io/ipfs/bafkreibm7vlwjjwjrz6qm2t4duf6cu42nmddstluci7iw7nwzvksda7nyq'});totalMints+=goc;}
+  }catch{}
+
+  document.getElementById('profMints').textContent=totalMints||'0';
+
+  const nftGrid=document.getElementById('profNfts');
+  if(nftData.length===0){
+    nftGrid.innerHTML='<div style="font-size:12px;color:#3a6a9a;text-align:center;padding:20px;grid-column:span 2">No NFTs yet. <a href="#" onclick="showTab(\'nft\',null)" style="color:#4a90d9">Mint one!</a></div>';
+  }else{
+    nftGrid.innerHTML=nftData.map(n=>`<div class="pnft-card"><div class="pnft-img"><img src="${n.img}" style="width:100%;height:100%;object-fit:cover"></div><div class="pnft-body"><div class="pnft-name">${n.name}</div><div class="pnft-count">× ${n.cnt}</div></div></div>`).join('');
+  }
+
+  // Tokens created
+  let tokenCount=0;
+  try{
+    const litProvider=await getLitProvider();
+    const factory=new ethers.Contract(CFG.TOKEN_FACTORY,FACTORY_ABI,litProvider);
+    const tokens=await factory.getTokensByCreator(userAddr);
+    tokenCount=tokens.length;
+    document.getElementById('profTokens').textContent=tokenCount;
+    if(tokens.length>0){
+      document.getElementById('profTokensCard').style.display='block';
+      const list=document.getElementById('profTokensList');list.innerHTML='';
+      for(const addr of tokens.slice(-5).reverse()){
+        try{const t=new ethers.Contract(addr,TOKEN_ABI,litProvider);const n=await t.name();const s=await t.symbol();list.innerHTML+=`<div class="token-item"><div class="token-item-left"><div class="token-item-icon">${s.slice(0,2)}</div><div><div class="token-item-name">${n} (${s})</div><div class="token-item-addr">${addr.slice(0,16)}...</div></div></div><button class="token-item-copy" onclick="navigator.clipboard.writeText('${addr}')">Copy</button></div>`;}catch{}
+      }
+    }
+  }catch{document.getElementById('profTokens').textContent='0';}
+
+  // LP balance
+  try{
+    const litProvider=await getLitProvider();
+    const swap=new ethers.Contract(CFG.SWAP,SWAP_ABI,litProvider);
+    const lp=await swap.lpBalance(userAddr);
+    document.getElementById('profLp').textContent=fmt(lp);
+  }catch{}
+
+  // Save to leaderboard storage
+  saveLbEntry(userAddr,totalMints,tokenCount);
+}
+
+// ===== LIVE FEED =====
+const feedItems=[];
+const feedTypes={
+  swap:{icon:'⚡',cls:'fi-swap',label:'Swap'},
+  mint:{icon:'🎨',cls:'fi-mint',label:'Mint'},
+  token:{icon:'🪙',cls:'fi-token',label:'Token'},
+  liq:{icon:'💧',cls:'fi-liq',label:'Liquidity'}
+};
+function addFeedItem(type,addr,desc){
+  const t=feedTypes[type]||feedTypes.swap;
+  const now=new Date();
+  const timeStr=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0')+':'+now.getSeconds().toString().padStart(2,'0');
+  feedItems.unshift({type,addr,desc,timeStr});
+  if(feedItems.length>50)feedItems.pop();
+  renderFeed();
+}
+function renderFeed(){
+  const list=document.getElementById('feedList');
+  if(feedItems.length===0){list.innerHTML='<div style="font-size:12px;color:#3a6a9a;text-align:center;padding:20px">No activity yet. Make a swap or mint!</div>';return;}
+  list.innerHTML=feedItems.slice(0,20).map(item=>{
+    const t=feedTypes[item.type]||feedTypes.swap;
+    const shortAddr=item.addr?item.addr.slice(0,6)+'...'+item.addr.slice(-4):'Unknown';
+    return`<div class="feed-item"><div class="feed-icon ${t.cls}">${t.icon}</div><div class="feed-body"><div class="feed-title">${item.desc}</div><div class="feed-sub">${shortAddr}</div></div><div class="feed-time">${item.timeStr}</div></div>`;
+  }).join('');
+}
+// Seed with some demo events
+function seedFeed(){
+  const demos=[
+    {type:'mint',addr:'0x1a2b3c4d5e6f7890',desc:'Minted Gold Pass 👑'},
+    {type:'swap',addr:'0xdeadbeef12345678',desc:'Swapped 10 zkLTC → ESP'},
+    {type:'token',addr:'0xabcdef1234567890',desc:'Deployed token MOON'},
+    {type:'mint',addr:'0x9876543210abcdef',desc:'Minted Limited Pass'},
+    {type:'liq',addr:'0x1111222233334444',desc:'Added liquidity 5 zkLTC + 100 ESP'},
+    {type:'swap',addr:'0xaaaabbbbccccdddd',desc:'Swapped 2.5 zkLTC → ESP'},
+    {type:'mint',addr:'0x5555666677778888',desc:'Minted Genesis Pass'},
+  ];
+  const now=new Date();
+  demos.forEach((d,i)=>{
+    const t=new Date(now-i*180000);
+    const timeStr=t.getHours().toString().padStart(2,'0')+':'+t.getMinutes().toString().padStart(2,'0')+':'+t.getSeconds().toString().padStart(2,'0');
+    feedItems.push({...d,timeStr});
+  });
+  renderFeed();
+}
+
+// ===== LEADERBOARD =====
+let lbMode='mints';
+const lbData={};
+function saveLbEntry(addr,mints,tokens){
+  if(!addr)return;
+  lbData[addr]=lbData[addr]||{mints:0,tokens:0};
+  if(mints>lbData[addr].mints)lbData[addr].mints=mints;
+  if(tokens>lbData[addr].tokens)lbData[addr].tokens=tokens;
+  renderLb();
+}
+function switchLb(mode){
+  lbMode=mode;
+  document.getElementById('lbTabMints').classList.toggle('active',mode==='mints');
+  document.getElementById('lbTabTokens').classList.toggle('active',mode==='tokens');
+  renderLb();
+}
+function renderLb(){
+  const list=document.getElementById('lbList');
+  const entries=Object.entries(lbData).sort((a,b)=>b[1][lbMode]-a[1][lbMode]).slice(0,10);
+  if(entries.length===0){
+    list.innerHTML='<div style="font-size:12px;color:#3a6a9a;text-align:center;padding:20px">No data yet. Connect wallet to appear here!</div>';
+    return;
+  }
+  const rankCls=['top1','top2','top3'];
+  list.innerHTML=entries.map(([addr,data],i)=>{
+    const val=data[lbMode];
+    const shortAddr=addr.slice(0,8)+'...'+addr.slice(-6);
+    const isMe=userAddr&&addr.toLowerCase()===userAddr.toLowerCase();
+    const badge=isMe?'<span class="lb-badge">← you</span>':'';
+    const rc=rankCls[i]||'';
+    return`<div class="lb-row" style="${isMe?'border-color:#2a5a8c':''}"><div class="lb-rank ${rc}">${i+1}</div><div class="lb-addr">${shortAddr}${badge}</div><div class="lb-val">${val} ${lbMode==='mints'?'NFTs':'tokens'}</div></div>`;
+  }).join('');
+}
+
+// ===== UTILS =====
+function st(id,msg,type){const el=document.getElementById(id);if(!el)return;el.textContent=msg;el.className='status show '+(type||'');}
+function fmt(wei){return parseFloat(ethers.formatEther(wei)).toFixed(4);}
+function short(a){return a.slice(0,6)+'...'+a.slice(-4);}
+
+function showTab(name,el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  document.querySelectorAll('.nav-link,.mob-btn').forEach(b=>b.classList.remove('active'));
+  if(el)el.classList.add('active');
+  if(name==='nft')refreshNft();
+  if(name==='liquidity')loadPool();
+  if(name==='create')loadCreatePage();
+  if(name==='home')loadHomeStats();
+  if(name==='profile')loadProfile();
+  if(name==='feed')renderFeed();
+  if(name==='leaderboard')renderLb();
+}
+
+window.addEventListener('load',async()=>{
+  loadHomeStats();
+  loadGatePool();
+  const _tw=window.trustwallet||window.ethereum;
+  if(_tw){try{const accs=await _tw.request({method:'eth_accounts'});if(accs&&accs.length>0){provider=new ethers.BrowserProvider(_tw);userAddr=accs[0];signer=await provider.getSigner();_tw.on&&_tw.on('accountsChanged',a=>{if(a.length){userAddr=a[0];refreshWallet();}else disconnectWallet();});_tw.on&&_tw.on('chainChanged',()=>location.reload());await refreshWallet();}}catch{}}
+});
 </script>
 </body>
 </html>
