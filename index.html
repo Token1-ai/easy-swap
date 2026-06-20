@@ -383,7 +383,6 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
       <div style="padding:0 20px">
         <div class="section-sub" style="text-align:left;margin-bottom:16px">More NFTs</div>
         <div class="nft-grid-3">
-          <div class="nft-card bnb-card"><div class="nft-art"><img src="https://ipfs.io/ipfs/bafkreif43gg4azducogrhionfswumt24hvgl37z7ldv67p3acagxibajya" alt="Early Access"></div><div class="nft-body"><div class="nft-badge badge-limited">💎 BNB PASS</div><div class="nft-name">Early Access Pass</div><div class="nft-desc">Whitelist spot for ESP token presale.</div><div class="nft-price price-paid">~$0.90 in BNB</div><div class="nft-supply amber-supply">20,000 total</div><button class="nft-btn nft-btn-paid" onclick="showTab('nft',document.querySelectorAll('.nav-link')[3])">Get Access</button></div></div>
           <div class="nft-card green-card"><div class="nft-art"><img src="https://ipfs.io/ipfs/bafkreibfe7fu247y3mixrtkebldxlbmjb2pj22pglz7fucxhqy4lqkz6ne" alt="Limited Pass"></div><div class="nft-body"><div class="nft-badge badge-limited-green">🟢 LIMITED</div><div class="nft-name">Limited Pass</div><div class="nft-desc">Free mint. Only 10,000 for early community members.</div><div class="nft-price price-green">FREE</div><div class="nft-supply green-supply">10,000 total</div><button class="nft-btn nft-btn-green" onclick="showTab('nft',document.querySelectorAll('.nav-link')[3])">Mint Free</button></div></div>
           <div class="nft-card"><div class="nft-art"><img src="https://ipfs.io/ipfs/bafkreiezzeeol7ucbg7gm3mmfq6xi46wuwr26xmee2n6tssmhi3bq4zk5e" alt="Genesis"></div><div class="nft-body"><div class="nft-badge badge-free">✦ FREE</div><div class="nft-name">Genesis Pass</div><div class="nft-desc">Free unlimited mint. Your first step into Easy Swap.</div><div class="nft-price price-free">FREE</div><div class="nft-supply free-supply">∞ Unlimited</div><button class="nft-btn nft-btn-free" onclick="showTab('nft',document.querySelectorAll('.nav-link')[3])">Mint Free</button></div></div>
         </div>
@@ -512,16 +511,6 @@ nav{background:rgba(13,31,53,0.95);backdrop-filter:blur(10px);border-bottom:1px 
       </div>
     </div>
     <div class="nft-grid-3">
-      <div class="nft-card bnb-card">
-        <div class="nft-art"><img src="https://ipfs.io/ipfs/bafkreif43gg4azducogrhionfswumt24hvgl37z7ldv67p3acagxibajya" alt="Early Access"></div>
-        <div class="nft-body">
-          <div class="nft-badge badge-limited">💎 BNB</div><div class="nft-name">Early Access Pass</div>
-          <div class="benefits-box"><div class="benefits-title">Benefits</div><div class="benefit-item"><span class="benefit-dot">◆</span><span class="benefit-text">ESP presale whitelist</span></div><div class="benefit-item"><span class="benefit-dot">◆</span><span class="benefit-text">Buy before listing — lowest price</span></div><div class="benefit-item"><span class="benefit-dot">◆</span><span class="benefit-text">Only 20,000 passes</span></div></div>
-          <div class="nft-price price-paid" id="paidPriceLabel">~$0.90 in BNB</div><div class="nft-supply amber-supply" id="remainingSupply">20,000 total</div>
-          <button class="nft-btn nft-btn-paid" id="paidBtn" onclick="mintPaid()">🔑 Get Access</button>
-          <div class="nft-count bnb-count" id="paidCnt"></div>
-        </div>
-      </div>
       <div class="nft-card green-card">
         <div class="nft-art"><img src="https://ipfs.io/ipfs/bafkreibfe7fu247y3mixrtkebldxlbmjb2pj22pglz7fucxhqy4lqkz6ne" alt="Limited"></div>
         <div class="nft-body">
@@ -680,7 +669,6 @@ const CFG={
   GATE_SWAP:"0xbeC5C89d76dbee96C1a2bd3EF9701694590BF7E8",
   TEST_NFT:"0x3f6dAcf9600108c3fD27Fbdc4E777e2Ed70c0566",
   LIMITED_NFT:"0xd9145CCE52D386f254917e481eB44e9943F39138",
-  PAID_NFT:"0x95cedfc0C53D70833F7496b15930FAdcc4C731E3",
   GOLD_NFT:"0x95D3e857793C1B1EbfA509d1DF3232448f619b27",
   TOKEN_FACTORY:"0xb69Df265Ac37A3E6AB2C940cFA395FE7fF0C0A60",
   LITVM_ID:"0x1159",
@@ -692,7 +680,6 @@ const SWAP_ABI=["function swapNativeToESP() payable","function swapESPToNative(u
 const GATE_SWAP_ABI=["function swapNativeToGATE() payable","function swapGATEToNative(uint256)","function getAmountOut(bool,uint256) view returns(uint256)","function getReserves() view returns(uint256,uint256)","function addLiquidity(uint256) payable","function removeLiquidity(uint256)","function lpBalance(address) view returns(uint256)","function reserveNative() view returns(uint256)","function reserveGATE() view returns(uint256)"];
 const FREE_NFT_ABI=["function mint()","function mintedCount(address) view returns(uint256)"];
 const LIMITED_NFT_ABI=["function mint()","function mintedCount(address) view returns(uint256)","function remainingSupply() view returns(uint256)"];
-const PAID_NFT_ABI=["function mint(uint256) payable","function getMintPrice() view returns(uint256)","function remainingSupply() view returns(uint256)","function mintedCount(address) view returns(uint256)"];
 const GOLD_NFT_ABI=["function mint() payable","function getMintPrice() view returns(uint256)","function remainingSupply() view returns(uint256)","function mintedCount(address) view returns(uint256)","function isVIP(address) view returns(bool)"];
 const FACTORY_ABI=["function createToken(string,string,uint8,uint256,bool,bool,bool) payable returns(address)","function creationFee() view returns(uint256)","function getTokensByCreator(address) view returns(address[])","function totalTokensCreated() view returns(uint256)"];
 const TOKEN_ABI=["function name() view returns(string)","function symbol() view returns(string)"];
@@ -922,14 +909,12 @@ async function refreshNft(){
     try{const nft=new ethers.Contract(CFG.LIMITED_NFT,LIMITED_NFT_ABI,provider);const cnt=await nft.mintedCount(userAddr);const rem=await nft.remainingSupply();document.getElementById("limitedCnt").textContent="You minted: "+cnt;document.getElementById("limitedRemaining").textContent=rem+" / 10,000 remaining";}catch{}
   }
   if(chain===CFG.BNB_ID){
-    try{const nft=new ethers.Contract(CFG.PAID_NFT,PAID_NFT_ABI,provider);const cnt=await nft.mintedCount(userAddr);const price=await nft.getMintPrice();const rem=await nft.remainingSupply();document.getElementById("paidCnt").textContent="You minted: "+cnt;document.getElementById("paidPriceLabel").textContent=parseFloat(ethers.formatEther(price)).toFixed(6)+" BNB (~$0.90)";document.getElementById("remainingSupply").textContent=rem+" / 20,000 remaining";}catch{}
     try{const gold=new ethers.Contract(CFG.GOLD_NFT,GOLD_NFT_ABI,provider);const cnt=await gold.mintedCount(userAddr);const price=await gold.getMintPrice();const rem=await gold.remainingSupply();document.getElementById("goldCnt").textContent="You minted: "+cnt;document.getElementById("goldPriceNft").textContent=parseFloat(ethers.formatEther(price)).toFixed(5)+" BNB (~$6.70)";document.getElementById("goldLeftNft").textContent=rem.toString();}catch{}
   }
-  if(chain.toLowerCase()!==CFG.LITVM_ID.toLowerCase()&&chain!==CFG.BNB_ID){warn.style.display="block";warn.textContent="⚠️ Switch to LitVM for free NFTs or BNB Chain for Gold Pass & Early Access Pass";}
+  if(chain.toLowerCase()!==CFG.LITVM_ID.toLowerCase()&&chain!==CFG.BNB_ID){warn.style.display="block";warn.textContent="⚠️ Switch to LitVM for free NFTs or BNB Chain for Gold Pass";}
 }
 async function mintFree(){if(!userAddr){openWModal();return;}const net=await provider.getNetwork();if("0x"+net.chainId.toString(16)!==CFG.LITVM_ID.toLowerCase()){try{st("nftSt","Switching to LitVM...","wait");await switchNet(CFG.LITVM_ID,CFG.LITVM_NET);}catch{st("nftSt","Network error","err");return;}}const btn=document.getElementById("freeBtn");try{btn.disabled=true;st("nftSt","Confirm in wallet...","wait");const tx=await(new ethers.Contract(CFG.TEST_NFT,FREE_NFT_ABI,signer)).mint();await tx.wait();st("nftSt","✅ Genesis Pass minted!","ok");addFeedItem("mint",userAddr,"Minted Genesis Pass");refreshNft();}catch(e){st("nftSt","❌ "+(e.reason||e.message),"err");}btn.disabled=false;}
 async function mintLimited(){if(!userAddr){openWModal();return;}const net=await provider.getNetwork();if("0x"+net.chainId.toString(16)!==CFG.LITVM_ID.toLowerCase()){try{st("nftSt","Switching to LitVM...","wait");await switchNet(CFG.LITVM_ID,CFG.LITVM_NET);}catch{st("nftSt","Network error","err");return;}}const btn=document.getElementById("limitedBtn");try{btn.disabled=true;st("nftSt","Confirm in wallet...","wait");const tx=await(new ethers.Contract(CFG.LIMITED_NFT,LIMITED_NFT_ABI,signer)).mint();await tx.wait();st("nftSt","✅ Limited Pass minted!","ok");addFeedItem("mint",userAddr,"Minted Limited Pass");refreshNft();}catch(e){st("nftSt","❌ "+(e.reason||e.message),"err");}btn.disabled=false;}
-async function mintPaid(){if(!userAddr){openWModal();return;}const net=await provider.getNetwork();if("0x"+net.chainId.toString(16)!==CFG.BNB_ID){try{st("nftSt","Switching to BNB...","wait");await switchNet(CFG.BNB_ID);}catch{st("nftSt","Network error","err");return;}}const btn=document.getElementById("paidBtn");try{btn.disabled=true;const nft=new ethers.Contract(CFG.PAID_NFT,PAID_NFT_ABI,signer);const price=await nft.getMintPrice();st("nftSt","Confirm in wallet ("+parseFloat(ethers.formatEther(price)).toFixed(6)+" BNB)...","wait");await(await nft.mint(1,{value:price})).wait();st("nftSt","✅ Early Access Pass minted!","ok");addFeedItem("mint",userAddr,"Minted Early Access Pass");refreshNft();}catch(e){st("nftSt","❌ "+(e.reason||e.message),"err");}btn.disabled=false;}
 async function mintGold(){if(!userAddr){openWModal();return;}const net=await provider.getNetwork();if("0x"+net.chainId.toString(16)!==CFG.BNB_ID){try{st("nftSt","Switching to BNB...","wait");await switchNet(CFG.BNB_ID);}catch{st("nftSt","Network error","err");return;}}const btn=document.getElementById("goldBtn");try{btn.disabled=true;const nft=new ethers.Contract(CFG.GOLD_NFT,GOLD_NFT_ABI,signer);const price=await nft.getMintPrice();st("nftSt","Confirm in wallet ("+parseFloat(ethers.formatEther(price)).toFixed(5)+" BNB)...","wait");await(await nft.mint({value:price})).wait();st("nftSt","👑 Gold Pass minted! Welcome to VIP!","ok");addFeedItem("mint",userAddr,"Minted 👑 Gold Pass");refreshNft();loadHomeStats();}catch(e){st("nftSt","❌ "+(e.reason||e.message),"err");}btn.disabled=false;}
 
 // ===== TOKEN FACTORY =====
@@ -961,7 +946,7 @@ async function loadProfile(){
   try{const bnbProvider=new ethers.JsonRpcProvider("https://bsc-dataseed.binance.org");const gold=new ethers.Contract(CFG.GOLD_NFT,GOLD_NFT_ABI,bnbProvider);const vip=await gold.isVIP(userAddr);document.getElementById("profVipRow").style.display=vip?"flex":"none";}catch{}
   let totalMints=0;const nftData=[];
   try{const litProvider=await getLitProvider();const genesis=new ethers.Contract(CFG.TEST_NFT,FREE_NFT_ABI,litProvider);const gc=parseInt(await genesis.mintedCount(userAddr));if(gc>0){nftData.push({name:"Genesis Pass",cnt:gc,img:"https://ipfs.io/ipfs/bafkreiezzeeol7ucbg7gm3mmfq6xi46wuwr26xmee2n6tssmhi3bq4zk5e"});totalMints+=gc;}const limited=new ethers.Contract(CFG.LIMITED_NFT,LIMITED_NFT_ABI,litProvider);const lc=parseInt(await limited.mintedCount(userAddr));if(lc>0){nftData.push({name:"Limited Pass",cnt:lc,img:"https://ipfs.io/ipfs/bafkreibfe7fu247y3mixrtkebldxlbmjb2pj22pglz7fucxhqy4lqkz6ne"});totalMints+=lc;}}catch{}
-  try{const bnbProvider=new ethers.JsonRpcProvider("https://bsc-dataseed.binance.org");const paid=new ethers.Contract(CFG.PAID_NFT,PAID_NFT_ABI,bnbProvider);const pc=parseInt(await paid.mintedCount(userAddr));if(pc>0){nftData.push({name:"Early Access Pass",cnt:pc,img:"https://ipfs.io/ipfs/bafkreif43gg4azducogrhionfswumt24hvgl37z7ldv67p3acagxibajya"});totalMints+=pc;}const gold=new ethers.Contract(CFG.GOLD_NFT,GOLD_NFT_ABI,bnbProvider);const goc=parseInt(await gold.mintedCount(userAddr));if(goc>0){nftData.push({name:"Gold Pass 👑",cnt:goc,img:"https://ipfs.io/ipfs/bafkreibm7vlwjjwjrz6qm2t4duf6cu42nmddstluci7iw7nwzvksda7nyq"});totalMints+=goc;}}catch{}
+  try{const bnbProvider=new ethers.JsonRpcProvider("https://bsc-dataseed.binance.org");const gold=new ethers.Contract(CFG.GOLD_NFT,GOLD_NFT_ABI,bnbProvider);const goc=parseInt(await gold.mintedCount(userAddr));if(goc>0){nftData.push({name:"Gold Pass 👑",cnt:goc,img:"https://ipfs.io/ipfs/bafkreibm7vlwjjwjrz6qm2t4duf6cu42nmddstluci7iw7nwzvksda7nyq"});totalMints+=goc;}}catch{}
   document.getElementById("profMints").textContent=totalMints||"0";
   const nftGrid=document.getElementById("profNfts");
   if(nftData.length===0){nftGrid.innerHTML="<div style='font-size:12px;color:#3a6a9a;text-align:center;padding:20px;grid-column:span 2'>No NFTs yet. <a href='#' onclick='showTab(\"nft\",null)' style='color:#4a90d9'>Mint one!</a></div>";}
