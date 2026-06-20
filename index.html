@@ -689,7 +689,7 @@ const CFG={
 };
 const ERC20_ABI=["function balanceOf(address) view returns(uint256)","function approve(address,uint256) returns(bool)","function allowance(address,address) view returns(uint256)"];
 const SWAP_ABI=["function swapNativeToESP() payable","function swapESPToNative(uint256)","function getAmountOut(bool,uint256) view returns(uint256)","function getReserves() view returns(uint256,uint256)","function addLiquidity(uint256) payable","function lpBalance(address) view returns(uint256)"];
-const GATE_SWAP_ABI=["function swapNativeToToken() payable","function swapTokenToNative(uint256)","function getAmountOut(bool,uint256) view returns(uint256)","function getReserves() view returns(uint256,uint256)"];
+const GATE_SWAP_ABI=["function swapNativeToGATE() payable","function swapGATEToNative(uint256)","function getAmountOut(bool,uint256) view returns(uint256)","function getReserves() view returns(uint256,uint256)","function addLiquidity(uint256) payable","function removeLiquidity(uint256)","function lpBalance(address) view returns(uint256)","function reserveNative() view returns(uint256)","function reserveGATE() view returns(uint256)"];
 const FREE_NFT_ABI=["function mint()","function mintedCount(address) view returns(uint256)"];
 const LIMITED_NFT_ABI=["function mint()","function mintedCount(address) view returns(uint256)","function remainingSupply() view returns(uint256)"];
 const PAID_NFT_ABI=["function mint(uint256) payable","function getMintPrice() view returns(uint256)","function remainingSupply() view returns(uint256)","function mintedCount(address) view returns(uint256)"];
@@ -866,7 +866,7 @@ async function doBuyGate(){
     btn.disabled=true;btn.textContent="Pending...";btn.className="main-btn btn-wait";
     st("gateSt","Confirm in wallet...","wait");
     const gs=new ethers.Contract(CFG.GATE_SWAP,GATE_SWAP_ABI,signer);
-    const tx=await gs.swapNativeToToken({value:ethers.parseEther(v.toString())});
+    const tx=await gs.swapNativeToGATE({value:ethers.parseEther(v.toString())});
     await tx.wait();
     st("gateSt","✅ GATE purchased! Check your wallet.","ok");
     addFeedItem("swap",userAddr,"Bought GATE with "+v+" zkLTC");
@@ -887,10 +887,10 @@ async function doSellGate(){
     st("gateSellSt","Approving GATE...","wait");
     const gate=new ethers.Contract(CFG.GATE_TOKEN,ERC20_ABI,signer);
     const amt=ethers.parseEther(v.toString());
-    if(await gate.allowance(userAddr,CFG.GATE_SWAP)<amt){await(await gate.approve(CFG.GATE_SWAP,amt*2n)).wait();}
+    const allowance=await gate.allowance(userAddr,CFG.GATE_SWAP);if(allowance<amt){await(await gate.approve(CFG.GATE_SWAP,amt*2n)).wait();}
     st("gateSellSt","Confirm in wallet...","wait");
     const gs=new ethers.Contract(CFG.GATE_SWAP,GATE_SWAP_ABI,signer);
-    const tx=await gs.swapTokenToNative(amt);
+    const tx=await gs.swapGATEToNative(amt);
     await tx.wait();
     st("gateSellSt","✅ Sold! zkLTC received.","ok");
     addFeedItem("swap",userAddr,"Sold "+v+" GATE → zkLTC");
